@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import bcrypt from "bcryptjs";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -22,8 +23,20 @@ export async function POST(request: NextRequest) {
     );
 
   try {
+    const encryptedPassword = await bcrypt.hash(newAdminUser?.password, 10);
+
+    if (!encryptedPassword)
+      return NextResponse.json(
+        { data: "Couldn't hash the password" },
+        { status: 500 }
+      );
+
     const newUser = await prisma.user.create({
-      data: { ...newAdminUser, verified: true, isAdmin: true },
+      data: {
+        ...newAdminUser,
+        verified: true,
+        password: encryptedPassword,
+      },
     });
 
     if (!newUser)

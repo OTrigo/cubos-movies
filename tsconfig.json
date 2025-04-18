@@ -16,7 +16,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@actions/*": ["./actions/*"]
+      "@actions/*": ["./actions/*"],
+      "@public/*": ["./public/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

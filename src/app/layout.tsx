@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/contexts/ThemeContext"; // ajuste o path se necessário
+import TanstackProvider from "@/contexts/TanstackProvider";
+import Header from "./components/ui/Header";
+import Footer from "./components/ui/Footer";
 
 const interFont = Inter({
   variable: "--font-inter-sans",
@@ -20,9 +23,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <ThemeProvider>
-        <body className={`${interFont.variable} antialiased`}>{children}</body>
-      </ThemeProvider>
+      <TanstackProvider>
+        <ThemeProvider>
+          <body className={`${interFont.variable} antialiased`}>
+            <Header />
+            {children}
+            <Footer />
+          </body>
+        </ThemeProvider>
+      </TanstackProvider>
     </html>
   );
 }
