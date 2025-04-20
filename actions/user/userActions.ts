@@ -7,7 +7,8 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { randomBytes } from "crypto";
 import { cookies } from "next/headers";
-import { sendValidationEmail } from "@/lib/sendValidationEmail";
+import { sendEmail } from "@/lib/sendEmail";
+import { sendConfirmationEmail } from "@actions/email/emailActions";
 
 type CreateUserProps = {
   email: string;
@@ -80,6 +81,12 @@ export const getUserByToken = async () => {
   return user;
 };
 
+export const isVerifiedUser = async () => {
+  const user = await getUserByToken();
+
+  if (user) return user?.verified;
+};
+
 export const createUser = async ({
   email,
   password,
@@ -104,7 +111,12 @@ export const createUser = async ({
     });
 
     if (!recordToken) return { error: "Couldn't create a token" };
-    const sentEmail = await sendValidationEmail({ email, token });
+
+    const sentEmail = await sendEmail({
+      email,
+      token,
+      variation: "validation",
+    });
 
     if (!sentEmail) return { createdUser: true, sentEmail: false };
     return { createdUser: true, sentEmail: true };
@@ -112,4 +124,34 @@ export const createUser = async ({
     console.error(err);
     return { error: "Couldn't create user" };
   }
+};
+
+export const validateUser = async ({
+  token,
+  email,
+}: {
+  token: string;
+  email: string;
+}) => {
+  const user = await prisma.user.findUnique({ where: { email } });
+  const isValidToken = await prisma.emailVerificationToken.findFirst({
+    where: { token, userId: user?.id },
+  });
+
+  console.log({ user, isValidToken });
+
+  if (!user || !isValidToken) return { error: "Invalid token" };
+
+  const updatedUser = await prisma.user.update({
+    where: { id: user.id },
+    data: { verified: true },
+  });
+
+  if (!updatedUser) return { error: "Couldn't update user" };
+
+  const sentEmail = await sendConfirmationEmail({ email, token });
+
+  if (!sentEmail) return { error: "Couldn't send confirmation email" };
+
+  return { success: true, data: updatedUser };
 };

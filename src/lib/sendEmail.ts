@@ -1,14 +1,16 @@
 "use server";
 
 import { Resend } from "resend";
-import { VerificationTemplate } from "../../emails/verification";
+import { getTemplateEmail } from "../../emails/verification";
 
-export const sendValidationEmail = async ({
+export const sendEmail = async ({
   email,
   token,
+  variation,
 }: {
   email: string;
   token: string;
+  variation: "validation" | "confirmation";
 }) => {
   if (!process.env.RESEND_API_KEY) console.error("No API Key");
 
@@ -16,15 +18,18 @@ export const sendValidationEmail = async ({
 
   const resend = new Resend(process.env.RESEND_API_KEY);
 
+  const { subject, html } = getTemplateEmail({
+    token,
+    localEnv: process.env.NODE_ENV,
+    variation,
+  });
+
   try {
     const sentEmail = resend.emails.send({
       from: "onboarding@resend.dev",
       to: email,
-      subject: "Seja bem vindo ao Cubos Movies!",
-      html: VerificationTemplate({
-        verificationToken: token,
-        localEnv: process.env.NODE_ENV,
-      }),
+      subject,
+      html,
     });
 
     if (!sentEmail) return { error: "Couldn't send an email" };

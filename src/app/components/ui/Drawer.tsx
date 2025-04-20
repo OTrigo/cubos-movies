@@ -11,6 +11,7 @@ const Drawer = ({
   onClose: () => void;
   show: boolean;
 }) => {
+  
   return (
     <>
       {show && (
@@ -33,7 +34,7 @@ const Drawer = ({
                 <Close />
               </button>
             </p>
-            <div className="flex h-[calc(100%-68px)] flex-col justify-between gap-2 p-4 text-[24px] overflow-y-scroll">
+            <div className="flex h-[calc(100%-68px)] flex-col justify-between gap-2 p-4 text-[24px]">
               {children}
             </div>
           </div>

@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { CircularProgress } from "../ui/CircularProgress";
 import Image from "next/image";
+import Background from "@/assets/background.png";
 
 const MovieDetails = ({ ...props }) => {
   const {
@@ -76,9 +77,11 @@ const MovieDetails = ({ ...props }) => {
         }}
       />
       <Image
-        src={banner ?? "/assets/placeholder.png"}
+        src={banner ?? Background}
         alt={`${banner} Banner`}
         className="invisible absolute z-0 object-cover md:h-full md:max-h-[90%] w-full md:aspect-[1448/603] md:visible"
+        width={1440}
+        height={564}
       />
       <div className="flex flex-col relative z-10 gap-4">
         <div className="flex relative md:flex-row flex-col justify-between">
@@ -108,6 +111,8 @@ const MovieDetails = ({ ...props }) => {
             src={`${image ?? "/assets/placeholder.png"}`}
             alt={`${friendlyTitle ?? "A movie"} Poster`}
             className="w-[374px] rounded-lg object-cover"
+            width={183}
+            height={281}
           />
           <div className="flex flex-grow flex-col gap-4 flex-1">
             <div className="flex md:flex-row flex-col justify-between md:h-[98px]">

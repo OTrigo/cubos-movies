@@ -6,6 +6,7 @@ import { z } from "zod";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useUser } from "@/hooks/useUser";
+import Background from "@/assets/background.png";
 
 const LoginPage = () => {
   const { data: user, isLoading, error } = useUser();
@@ -82,7 +83,7 @@ const LoginPage = () => {
 
       <Image
         className="absolute z-[0] h-full top-[72px] w-full max-h-[564px] object-cover opacity-40"
-        src={"/assets/background.png"}
+        src={Background}
         alt="Cubos Movies Background"
         width={1440}
         height={564}

@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { useMovieSearch } from "@/hooks/useMovie";
 import { EditFilterProps } from "@actions/movie/movieActions";
 import { useRouter } from "next/navigation";
+import Background from "@/assets/background.png";
 
 const MoviesPage = () => {
   const { data: user, isLoading: isLoadingUser, error: errorUser } = useUser();
@@ -86,7 +87,7 @@ const MoviesPage = () => {
 
       <Image
         className="absolute z-[0] h-full top-[72px] w-full max-h-[564px] object-cover opacity-40"
-        src={"/assets/background.png"}
+        src={Background}
         alt="Cubos Movies Background"
         width={1440}
         height={564}

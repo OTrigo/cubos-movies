@@ -26,7 +26,7 @@ export default function RootLayout({
       <TanstackProvider>
         <ThemeProvider>
           <body
-            className={`${MontserratFont.variable} antialiased`}
+            className={`${MontserratFont.variable} antialiased font-montserrat`}
           >
             <Header />
             {children}

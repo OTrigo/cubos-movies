@@ -1,6 +1,8 @@
 import { Movie } from "@prisma/client";
 import Image from "next/image";
 
+import Background from "@/assets/background.png";
+
 const MovieCard = ({ movie }: { movie: Movie; key: number }) => {
   return (
     <a
@@ -9,9 +11,11 @@ const MovieCard = ({ movie }: { movie: Movie; key: number }) => {
     >
       <div className="relative w-[183px] h-[281px] md:w-[235px] md:h-[355px] flex justify-center">
         <Image
-          src={movie?.image ?? '/assets/placeholder.png'}
+          src={movie.image ?? Background}
           className="bg-red-300 object-cover w-full h-full"
           alt={movie?.fullTitle ?? "Cubos Movies"}
+          width={183}
+          height={281}
         />
         <div
           className="flex flex-col justify-end absolute bottom-0 p-4 h-[50%] w-full"

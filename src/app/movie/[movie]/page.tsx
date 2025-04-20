@@ -3,16 +3,21 @@
 import Image from "next/image";
 import MovieDetails from "@/app/components/movie/MovieDetails";
 import MovieTrailer from "@/app/components/movie/MovieTrailer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Drawer from "@/app/components/ui/Drawer";
 import { useMovie } from "@/hooks/useMovie";
 import { useParams } from "next/navigation";
 import MovieForm from "@/app/components/movie/MovieForm";
 import { handleMovieForm } from "@/utils/handleMovieForm";
+import Background from "@/assets/background.png";
 
 export default function MovieDetailsPage() {
   const { movie }: { movie: string } = useParams();
   const [showDrawer, setShowDrawer] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = showDrawer ? "hidden" : "auto";
+  }, [showDrawer]);
 
   const { data, refetch } = useMovie({ movieId: movie ?? "" });
 
@@ -49,7 +54,7 @@ export default function MovieDetailsPage() {
 
         <Image
           className="absolute z-[0] h-full top-[72px] w-full max-h-[564px] object-cover opacity-40"
-          src={"/assets/background.png"}
+          src={Background}
           alt="Cubos Movies Background"
           width={1440}
           height={564}
