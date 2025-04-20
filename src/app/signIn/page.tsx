@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Background from "@public/assets/background.png";
 import { useUser } from "@/hooks/useUser";
 
 const LoginPage = () => {
@@ -76,7 +75,7 @@ const LoginPage = () => {
 
       <Image
         className="absolute z-[0] h-full top-[72px] w-full max-h-[564px] object-cover opacity-40"
-        src={Background}
+        src={'/assets/background.png'}
         alt="Cubos Movies Background"
         width={1440}
         height={564}

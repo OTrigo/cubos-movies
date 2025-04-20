@@ -1,8 +1,6 @@
 import { Movie } from "@prisma/client";
 import Image from "next/image";
 
-import Placeholder from "@public/assets/placeholder.png";
-
 const MovieCard = ({ movie }: { movie: Movie; key: number }) => {
   return (
     <a
@@ -11,7 +9,7 @@ const MovieCard = ({ movie }: { movie: Movie; key: number }) => {
     >
       <div className="relative w-[183px] h-[281px] md:w-[235px] md:h-[355px] flex justify-center">
         <Image
-          src={movie?.image ?? Placeholder}
+          src={movie?.image ?? '/assets/placeholder.png'}
           className="bg-red-300 object-cover w-full h-full"
           alt={movie?.fullTitle ?? "Cubos Movies"}
         />

@@ -2,7 +2,6 @@
 
 import { useUser } from "@/hooks/useUser";
 import Image from "next/image";
-import Background from "@public/assets/background.png";
 import MovieGrid from "./components/movie/MovieGrid";
 import MoviePagination from "./components/movie/MoviePagination";
 import MovieSearch from "./components/movie/MovieSearch";
@@ -87,7 +86,7 @@ const MoviesPage = () => {
 
       <Image
         className="absolute z-[0] h-full top-[72px] w-full max-h-[564px] object-cover opacity-40"
-        src={Background}
+        src={"/assets/background.png"}
         alt="Cubos Movies Background"
         width={1440}
         height={564}

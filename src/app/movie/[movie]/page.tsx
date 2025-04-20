@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Background from "@public/assets/background.png";
 import MovieDetails from "@/app/components/movie/MovieDetails";
 import MovieTrailer from "@/app/components/movie/MovieTrailer";
 import { useState } from "react";
@@ -50,7 +49,7 @@ export default function MovieDetailsPage() {
 
         <Image
           className="absolute z-[0] h-full top-[72px] w-full max-h-[564px] object-cover opacity-40"
-          src={Background}
+          src={"/assets/background.png"}
           alt="Cubos Movies Background"
           width={1440}
           height={564}

@@ -7,7 +7,6 @@ import { deleteMovie } from "@actions/movie/movieActions";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { CircularProgress } from "../ui/CircularProgress";
-import Placeholder from "@public/assets/placeholder.png";
 import Image from "next/image";
 
 const MovieDetails = ({ ...props }) => {
@@ -77,7 +76,7 @@ const MovieDetails = ({ ...props }) => {
         }}
       />
       <Image
-        src={banner ?? Placeholder}
+        src={banner ?? "/assets/placeholder.png"}
         alt={`${banner} Banner`}
         className="invisible absolute z-0 object-cover md:h-full md:max-h-[90%] w-full md:aspect-[1448/603] md:visible"
       />
@@ -106,7 +105,7 @@ const MovieDetails = ({ ...props }) => {
         </div>
         <div className="flex flex-col md:flex-row  gap-4">
           <Image
-            src={`${image ?? Placeholder}`}
+            src={`${image ?? "/assets/placeholder.png"}`}
             alt={`${friendlyTitle ?? "A movie"} Poster`}
             className="w-[374px] rounded-lg object-cover"
           />

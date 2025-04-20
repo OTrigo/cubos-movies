@@ -1,9 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
-import { z } from "zod";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Background from "@public/assets/background.png";
 import { useUser } from "@/hooks/useUser";
 
 const UnverifiedEmailPage = () => {
@@ -15,8 +13,6 @@ const UnverifiedEmailPage = () => {
     if (user) router.replace("/");
     return;
   }, [user, router]);
-
-  const [errors, setErrors] = useState<Record<string, string>>({});
 
   return (
     <div className="flex h-[calc(100vh-140px)] justify-center items-center w-full py-[281px] bg-[#121113]">
@@ -30,7 +26,7 @@ const UnverifiedEmailPage = () => {
 
       <Image
         className="absolute z-[0] h-full top-[72px] w-full max-h-[564px] object-cover opacity-40"
-        src={Background}
+        src={"/assets/background.png"}
         alt="Cubos Movies Background"
         width={1440}
         height={564}
@@ -38,7 +34,7 @@ const UnverifiedEmailPage = () => {
 
       <form
         className="relative z-10 flex flex-col gap-4 w-fit bg-[#232225] p-4 rounded-1"
-        onSubmit={(e) => handleLoginValidation(e)}
+        onSubmit={() => {}}
       >
         <label className="flex flex-col gap-4 h-fit">
           <span className="text-white text-[20px]">
