@@ -1,4 +1,4 @@
-import { getUserByToken } from "@actions/userActions";
+import { getUserByToken } from "@actions/user/userActions";
 import { useQuery } from "@tanstack/react-query";
 
 const useUser = () => {
@@ -6,7 +6,6 @@ const useUser = () => {
     queryKey: ["user"],
     queryFn: async () => {
       const user = await getUserByToken();
-      console.log({ user });
       if (!user) throw new Error("Usuário não autenticado");
       return user;
     },

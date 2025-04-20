@@ -1,5 +1,5 @@
 "use client";
-import { getUserByCredentials } from "@actions/userActions";
+import { getUserByCredentials } from "@actions/user/userActions";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
@@ -8,21 +8,21 @@ import Background from "@public/assets/background.png";
 import { useUser } from "@/hooks/useUser";
 
 const LoginPage = () => {
-  const { data: user } = useUser();
+  const { data: user, isLoading } = useUser();
 
   const router = useRouter();
 
   useEffect(() => {
-    console.log(user);
+    if (user) router.replace("/");
     return;
-  }, [user, router]);
+  }, [user, router, isLoading]);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleLoginValidation = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const UserLoginSchema = z.object({
-      email: z.string().email("Invalid email address."),
+      emailOrName: z.string().nonempty("Name or Email is required."),
       password: z.string().nonempty("Password is required."),
     });
 
@@ -45,6 +45,7 @@ const LoginPage = () => {
       );
 
       setErrors(errorMessages);
+      console.error({ errorMessages });
     }
 
     setErrors({});
@@ -56,9 +57,7 @@ const LoginPage = () => {
 
     const login = await getUserByCredentials(data);
 
-    console.log({ login });
-
-    if (!login) return;
+    if (login?.error) return;
 
     router.replace("/");
 
@@ -109,7 +108,9 @@ const LoginPage = () => {
         {errors.password && <>Invalid Pass</>}
         <div className="flex justify-between">
           <span>Esqueceu sua senha?</span>
-          <button className="bg-[#8E4EC6] w-[110px] h-[44px]">Entrar</button>
+          <button className="bg-[#8E4EC6] w-[110px] h-[44px] cursor-pointer">
+            Entrar
+          </button>
         </div>
       </form>
     </div>

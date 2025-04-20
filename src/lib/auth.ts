@@ -11,14 +11,10 @@ export const getUserIdFromToken = async () => {
   const cookieStore = await cookies();
   const token = cookieStore.get("session-token")?.value;
 
-  console.log({ token });
-
   if (!token) return;
 
   try {
     const decodedToken = jwt.verify(token, JWT_SECRET) as { id: string };
-
-    console.log({ decodedToken });
 
     return {
       userId: decodedToken.id,

@@ -2,7 +2,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { getUserIdFromToken } from "../src/lib/auth";
+import { getUserIdFromToken } from "../../src/lib/auth";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { randomBytes } from "crypto";
@@ -69,19 +69,13 @@ export const getUserByCredentials = async ({
 export const getUserByToken = async () => {
   const userInfo = await getUserIdFromToken();
 
-  console.log({ userInfo });
-
   if (!userInfo?.userId) return;
-
-  console.log(userInfo);
 
   const user = await prisma.user.findUnique({
     where: {
       id: userInfo?.userId ?? "",
     },
   });
-
-  console.log({ user });
 
   return user;
 };

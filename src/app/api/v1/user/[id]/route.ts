@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/prisma";
-import bcrypt from "bcryptjs";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(

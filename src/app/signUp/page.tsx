@@ -1,6 +1,6 @@
 "use client";
 
-import { createUser, getUserByCredentials } from "@actions/userActions";
+import { createUser } from "@actions/user/userActions";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
@@ -57,7 +57,8 @@ const LoginPage = () => {
       passwordConfirmation: formData.get("password") as string,
     };
 
-    if(data.password !== data.passwordConfirmation) setErrors({error: "password must match"})
+    if (data.password !== data.passwordConfirmation)
+      setErrors({ error: "password must match" });
 
     setErrors({});
 
@@ -131,7 +132,9 @@ const LoginPage = () => {
         </label>
         {errors.password && <>Invalid Pass</>}
         <div className="flex justify-end">
-          <button className="bg-[#8E4EC6] w-[110px] h-[44px]">Entrar</button>
+          <button className="bg-[#8E4EC6] w-[110px] h-[44px] cursor-pointer">
+            Entrar
+          </button>
         </div>
       </form>
     </div>

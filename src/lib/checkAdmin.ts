@@ -1,14 +1,15 @@
+"use server";
+
 import { prisma } from "./prisma";
 
-export const checkAdmin = ({ userId = "" }: { userId: string }) => {
-  console.log(userId);
+export const checkAdmin = async ({ userId = "" }: { userId: string }) => {
   if (!checkAdmin) return false;
 
-  prisma.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       id: userId,
     },
   });
 
-  return;
+  return user?.isAdmin;
 };

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/contexts/ThemeContext"; // ajuste o path se necessário
 import TanstackProvider from "@/contexts/TanstackProvider";
@@ -8,6 +8,11 @@ import Footer from "./components/ui/Footer";
 
 const interFont = Inter({
   variable: "--font-inter-sans",
+  subsets: ["latin"],
+});
+
+const MontserratFont = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
 });
 
@@ -25,7 +30,9 @@ export default function RootLayout({
     <html lang="pt-br">
       <TanstackProvider>
         <ThemeProvider>
-          <body className={`${interFont.variable} antialiased`}>
+          <body
+            className={`${MontserratFont.variable} antialiased`}
+          >
             <Header />
             {children}
             <Footer />

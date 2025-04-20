@@ -1,27 +1,82 @@
 "use client";
 
 import { useUser } from "@/hooks/useUser";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import Image from "next/image";
 import Background from "@public/assets/background.png";
 import MovieGrid from "./components/movie/MovieGrid";
 import MoviePagination from "./components/movie/MoviePagination";
+import MovieSearch from "./components/movie/MovieSearch";
+import Modal from "./components/ui/Modal";
+import { useEffect, useState } from "react";
+import { useMovieSearch } from "@/hooks/useMovie";
+import { EditFilterProps } from "@actions/movie/movieActions";
+import { useRouter } from "next/navigation";
 
 const MoviesPage = () => {
-  const { data: user, isLoading, error } = useUser();
+  const { data: user, isLoading: isLoadingUser, error: errorUser } = useUser();
 
-  console.log(user, isLoading, error);
+  const [filters, setFilters] = useState<EditFilterProps | undefined>(
+    undefined
+  );
+  const [search, setSearch] = useState("");
+  const [pagination, setPagination] = useState(0);
 
-  const movies = [{}, {}, {}, {}, {}, {}] as any[];
+  const router = useRouter();
 
-  if (isLoading) return <p>...</p>;
+  useEffect(() => {
+    if (!user && !isLoadingUser && errorUser) {
+      router.replace("/signIn");
+    }
+  }, [user, isLoadingUser, errorUser, router]);
 
-  if (!user || error) return <>Redirect...</>;
+  const {
+    data: movies,
+    isLoading: isLoadingMovie,
+    error: errorMovie,
+    refetch,
+  } = useMovieSearch({
+    search,
+    filters,
+    pagination,
+  });
+
+  useEffect(() => {
+    console.log(search);
+    if (search) {
+      refetch();
+    }
+  }, [search, refetch]);
+
+  const [showModal, setShowModal] = useState<{
+    show: boolean;
+    variant: "filter" | "add" | "";
+  }>({
+    show: false,
+    variant: "",
+  });
+
+  console.log({ user, errorUser });
+
+  if (isLoadingUser || isLoadingMovie || errorMovie) return <p>...</p>;
+
+  if (!user || errorUser) return <>Redirect...</>;
 
   return (
     <div className="flex flex-col justify-center items-center w-full bg-[#121113]">
-      <MovieSearch/>
+      <Modal
+        title={showModal.variant === "filter" ? "Filtros" : "Adicionar Filme"}
+        show={showModal.show}
+        variant={showModal.variant}
+        onClose={() => setShowModal({ show: false, variant: "" })}
+        setFilters={setFilters}
+        refetch={refetch}
+      />
+      <MovieSearch
+        setShowModal={setShowModal}
+        setSearch={setSearch}
+        pagination={pagination}
+        refetch={refetch}
+      />
       <div
         className="absolute z-[1] top-[72px] w-full h-[564px]"
         style={{
@@ -38,8 +93,12 @@ const MoviesPage = () => {
         height={564}
       />
 
-      <MovieGrid movies={movies} />
-      <MoviePagination movies={movies} />
+      <MovieGrid movies={movies?.data ?? []} />
+      <MoviePagination
+        setPagination={setPagination}
+        pagination={pagination}
+        totalPages={Math.trunc((movies?.total ?? 0) / 10)}
+      />
     </div>
   );
 };

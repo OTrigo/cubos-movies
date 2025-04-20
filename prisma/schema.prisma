@@ -40,25 +40,28 @@ model EmailVerificationToken {
 }
 
 model Movie {
-  id            String   @id @default(uuid())
-  friendlyTitle String
+  id            String    @id @default(uuid())
+  friendlyTitle String?
   fullTitle     String
-  sinopsys      String
-  releaseDate   DateTime
-  durationTime  Int
-  status        String
-  language      String
-  budget        Int
-  revenue       Int
-  profit        Int
-  tags          String[]
-  rating        Int
-  trailer       String
-  image         String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  sinopsys      String?
+  releaseDate   DateTime?
+  durationTime  Int?
+  status        String?
+  language      String?
+  budget        Int?
+  revenue       Int?
+  profit        Int?
+  tags          String?
+  rating        Int?
+  trailer       String?
+  image         String?
+  votes         String?
+  banner        String?
+  phrase        String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
   authorId                 String
-  author                   User    @relation(fields: [authorId], references: [id])
+  author                   User    @relation(fields: [authorId], references: [id], onDelete: Cascade)
   emailVerificationTokenId String?
 }

@@ -69,7 +69,7 @@ export const VerificationTemplate = ({
 
       <!-- Button -->
       <div style="text-align: center; margin: 32px 0;">
-        <a href="${localEnv === "development" ? "http://localhost:3000" : "https://domain.com"}/verify?token=${verificationToken}" 
+        <a href="${localEnv === "development" ? "http://localhost:3000" : "https://domain.com"}/validate?token=${verificationToken}" 
            style="background-color: #4f46e5; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-size: 16px;">
           Confirm Email
         </a>

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Background from "@public/assets/background.png";
 import { useUser } from "@/hooks/useUser";
-import { sendEmail } from "@actions/emailActions";
+import { sendEmail } from "@actions/email/emailActions";
 
 const ResendForm = ({ email }: { email: string }) => {
   const { data: user } = useUser();

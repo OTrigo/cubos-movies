@@ -9,6 +9,7 @@
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
+    "types": ["jest", "node"],
     "plugins": [
       {
         "name": "next"
