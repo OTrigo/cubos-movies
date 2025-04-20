@@ -1,5 +1,7 @@
 # Cubos Movie
 
+## Produção: https://cubos-movies-sv66.vercel.app/
+
 ## Technologies Used
 
 ### Frontend: 
