@@ -28,7 +28,7 @@ const LoginPage = () => {
     const formData = new FormData(e.currentTarget);
 
     const data = {
-      emailOrName: formData.get("emailOrName") as string,
+      email: formData.get("emailOrName") as string,
     };
 
     const sent = await sendNewPasswordEmail(data);

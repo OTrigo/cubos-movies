@@ -28,7 +28,7 @@ export const getUserByCredentials = async ({
   password,
 }: UserCredentials) => {
   const query = emailOrName.includes("@")
-    ? { email: emailOrName }
+    ? { emailOrName: emailOrName }
     : { name: emailOrName };
 
   try {
