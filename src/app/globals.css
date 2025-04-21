@@ -42,7 +42,7 @@
     --bg-button-secondary-default: #b744f708;
     --bg-button-secondary-hover: #c150ff18;
     --bg-button-secondary-active: #b412f904;
-    --bg-button-secondary-disabled: var(--bg-button-secondary-disabled);
+    --bg-button-secondary-disabled: #EBEAF808;
 
     --text-button-secondary-default: #f1ddff98;
     --text-button-secondary-disabled: #ece9fd49;
@@ -88,5 +88,4 @@ body {
   background: var(--bg-theme-1);
   color: var(--foreground);
   font-family: (--font-montserrat);
-  transition: 300ms ease-in-out;
 }
