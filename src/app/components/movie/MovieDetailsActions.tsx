@@ -25,7 +25,7 @@ const MovieDetailsActions = ({
       </div>
       <div className="flex gap-2 w-full md:w-fit">
         <button
-          className={`bg-[#B744F708] text-white px-3 py-1 rounded cursor-pointer ${isMobile && " py-3"}`}
+          className={`bg-[--bg-button-secondary-default] hover:bg-[var(--bg-button-secondary-hover)] disabled:bg-[var(--bg-button-secondary-disabled)] active:bg-[var(--bg-button-secondary-active)] text-[var(--text-button-secondary-default)] disabled:text-[var(--text-button-secondary-disabled)]] text-white px-3 py-1 rounded cursor-pointer ${isMobile && " py-3"}`}
           onClick={handleDeleteMovie}
         >
           Deletar
