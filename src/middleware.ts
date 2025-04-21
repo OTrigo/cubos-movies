@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
   const token = request.cookies.get("session-token")?.value;
 
   const pathname = request.nextUrl.pathname;
-  const publicRoutes = ["/signIn", "/signIn/validate"];
+  const publicRoutes = ["/signIn", "/signUp"];
 
   if (!token) {
     if (!publicRoutes.includes(pathname)) {
@@ -38,5 +38,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/signUp/:path*", "/movies/:path*", "/signIn/:path*"],
+  matcher: ["/", "/signUp/:path*", "/movies/:path*", "/validate"],
 };
