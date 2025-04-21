@@ -10,11 +10,11 @@ const MoviePagination = ({
   totalPages: number;
 }) => {
   return (
-    <div className="w-full flex justify-center items-center gap-3 p-6">
+    <div className="relative w-full flex justify-center items-center gap-3 p-6 z-30">
       <button
         className="w-[64px] h-[44px] min-h-[44px] gap-3 rounded-[2px] pt-3 pr-5 pb-3 pl-5 bg-[#8E4EC6] disabled:bg-[#EBEAF814] cursor-pointer"
         onClick={() => setPagination((prev) => prev - 1)}
-        disabled={pagination === 0}
+        disabled={pagination <= 0}
       >
         <svg
           width="25"
@@ -44,7 +44,7 @@ const MoviePagination = ({
       <button
         className="w-[64px] h-[44px] min-h-[44px] gap-3 rounded-[2px] pt-3 pr-5 pb-3 pl-5 bg-[#8E4EC6] disabled:bg-[#EBEAF814] cursor-pointer"
         onClick={() => setPagination((prev) => prev + 1)}
-        disabled={pagination === totalPages}
+        disabled={pagination >= totalPages}
       >
         <svg
           width="25"

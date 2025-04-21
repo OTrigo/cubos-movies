@@ -4,7 +4,6 @@ import Image from "next/image";
 import Placeholder from "@/assets/plcaceholder.png";
 
 const MovieCard = ({ movie }: { movie: Movie; key: number }) => {
-
   const imagePath = movie?.image ?? Placeholder;
 
   return (
@@ -15,7 +14,7 @@ const MovieCard = ({ movie }: { movie: Movie; key: number }) => {
       <div className="relative w-[183px] h-[281px] md:w-[235px] md:h-[355px] flex justify-center">
         <Image
           src={imagePath}
-          className="bg-red-300 object-cover w-full h-full"
+          className="bg-gray-600 object-cover w-full h-full"
           alt={movie?.fullTitle ?? "Cubos Movies"}
           width={183}
           height={281}

@@ -86,7 +86,7 @@ const LoginPage = () => {
         onSubmit={(e) => handleNewUser(e)}
       >
         <label className="flex flex-col gap-2 h-[67px]">
-          <span className="text-white text-[12.8px]">Nome</span>
+          <span className="text-white text-[12.8px] font-bold">Nome</span>
           <input
             className="bg-[#1A191B] text-[#6F6D78] w-[380px] h-[44px] min-h-[44px] rounded-[4px] p-3 border border-solid"
             type="name"
@@ -95,7 +95,7 @@ const LoginPage = () => {
           />
         </label>
         <label className="flex flex-col gap-2 h-[67px]">
-          <span className="text-white text-[12.8px]">E-mail</span>
+          <span className="text-white text-[12.8px] font-bold">E-mail</span>
           <input
             className="bg-[#1A191B] text-[#6F6D78] w-[380px] h-[44px] min-h-[44px] rounded-[4px] p-3 border border-solid"
             type="email"
@@ -105,7 +105,7 @@ const LoginPage = () => {
         </label>
         {errors.email && <>Invalid Email</>}
         <label className="flex flex-col gap-2 h-[67px]">
-          <span className="text-white text-[12.8px]">Senha</span>
+          <span className="text-white text-[12.8px] font-bold">Senha</span>
           <input
             className="bg-[#1A191B] text-[#6F6D78] w-[380px] h-[44px] min-h-[44px] rounded-[4px] p-3 border border-solid"
             type="password"
@@ -114,7 +114,9 @@ const LoginPage = () => {
           />
         </label>
         <label className="flex flex-col gap-2 h-[67px]">
-          <span className="text-white text-[12.8px]">Confirmação de senha</span>
+          <span className="text-white text-[12.8px] font-bold">
+            Confirmação de senha
+          </span>
           <input
             className="bg-[#1A191B] text-[#6F6D78] w-[380px] h-[44px] min-h-[44px] rounded-[4px] p-3 border border-solid"
             type="password"

@@ -137,7 +137,7 @@ export const createMovie = async (props: Partial<Movie>) => {
     phrase = "No data",
   } = props;
 
-  const release = new Date(releaseDate ?? "");
+  const release = new Date(releaseDate ?? 0);
 
   try {
     const movie = await prisma.movie.create({
@@ -178,6 +178,7 @@ export const editMovie = async ({
 }) => {
 
   const filteredData: Partial<Movie> = Object.fromEntries(
+    //eslint-disable-next-line 
     Object.entries(data).filter(([_, value]) => {
       const isInvalid =
         value === undefined ||
@@ -192,8 +193,6 @@ export const editMovie = async ({
     filteredData.releaseDate = new Date(filteredData.releaseDate);
   }
 
-  console.log({ data, movieId });
-
   try {
     const movie = await prisma.movie.update({
       where: {
@@ -201,8 +200,6 @@ export const editMovie = async ({
       },
       data: filteredData,
     });
-
-    console.log({ editedMovie: movie });
 
     return { success: true, data: movie };
   } catch (error) {
