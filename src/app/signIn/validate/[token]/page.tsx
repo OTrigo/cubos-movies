@@ -4,7 +4,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Image from "next/image";
 import { useUser } from "@/hooks/useUser";
 import { validateUser } from "@actions/user/userActions";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Background from "@/assets/background.png";
 
 const UnverifiedEmailPage = () => {
@@ -12,15 +12,21 @@ const UnverifiedEmailPage = () => {
 
   const { theme } = useTheme();
 
+  const router = useRouter();
+
   const token = useParams().token as string;
 
   const confirmAccount = async () => {
+    console.log("teste");
     if (!user) return;
+
+    console.log("teste2");
     await validateUser({
       email: user.email,
       token: token ?? "",
     });
     await refetch();
+    router.replace("/");
   };
 
   return (

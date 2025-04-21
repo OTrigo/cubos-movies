@@ -17,6 +17,8 @@ export type EditFilterProps = {
   status?: string;
   releaseFrom?: string;
   releaseTo?: string;
+  minDuration?: number;
+  maxDuration?: number;
 };
 
 export const getMoviesBySearch = async ({
@@ -44,8 +46,6 @@ export const getMoviesBySearch = async ({
         where: whereClause,
       }),
     ]);
-
-    console.log(movies, total);
 
     return { success: true, data: movies, total };
   } catch (error) {

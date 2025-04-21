@@ -1,7 +1,7 @@
 "use server";
 
 import { Resend } from "resend";
-import { getTemplateEmail } from "../../emails/verification";
+import { emailTypes, getTemplateEmail } from "../../emails/verification";
 
 export const sendEmail = async ({
   email,
@@ -10,7 +10,7 @@ export const sendEmail = async ({
 }: {
   email: string;
   token: string;
-  variation: "validation" | "confirmation";
+  variation: emailTypes;
 }) => {
   if (!process.env.RESEND_API_KEY) console.error("No API Key");
 

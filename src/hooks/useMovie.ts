@@ -17,7 +17,6 @@ const useMovieSearch = ({
   return useQuery({
     queryKey: ["movie"],
     queryFn: async () => {
-      console.log({ search, filters, pagination });
       const movie = await getMoviesBySearch({ search, filters, pagination });
       if (!movie) throw new Error("Usuário não autenticado");
       return movie;

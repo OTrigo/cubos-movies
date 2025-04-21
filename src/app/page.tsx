@@ -42,8 +42,6 @@ const MoviesPage = () => {
     pagination,
   });
 
-  console.log({ total: movies?.total });
-
   const { theme } = useTheme();
 
   useEffect(() => {

@@ -32,6 +32,8 @@ export default function MovieDetailsPage() {
     releaseDate: data.releaseDate!.toDateString(),
   };
 
+  const onClose = () => setShowDrawer(false);
+
   return (
     <>
       <Drawer
@@ -45,6 +47,7 @@ export default function MovieDetailsPage() {
             await refetch();
           }}
           variant="edit"
+          onClose={onClose}
         />
       </Drawer>
       <div

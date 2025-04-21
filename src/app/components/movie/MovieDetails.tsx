@@ -11,6 +11,7 @@ import { CircularProgress } from "../ui/CircularProgress";
 import Image from "next/image";
 import Background from "@/assets/background.png";
 import MovieDetailsActions from "./MovieDetailsActions";
+import Placeholder from "@/assets/plcaceholder.png";
 
 const MovieDetails = ({ ...props }) => {
   const {
@@ -39,6 +40,8 @@ const MovieDetails = ({ ...props }) => {
   const { data, isLoading, error } = useMovie({ movieId: id });
 
   const router = useRouter();
+
+  const imagePath = image ?? Placeholder;
 
   useEffect(() => {
     if (!data && error && !isLoading) router.replace("/");
@@ -102,7 +105,7 @@ const MovieDetails = ({ ...props }) => {
             className={`${theme}  flex flex-col w-full lg:flex-row gap-4 justify-center items-center`}
           >
             <Image
-              src={`${image ?? "/assets/placeholder.png"}`}
+              src={imagePath}
               alt={`${friendlyTitle ?? "A movie"} Poster`}
               className={`${theme}  w-[374px] h-[582px] rounded-lg object-cover`}
               width={374}

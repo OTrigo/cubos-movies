@@ -51,8 +51,6 @@ export const handleMovieForm = async (
       ...(bannerUrl && { banner: bannerUrl as string }),
     } as Partial<Movie>;
 
-    console.log({ data });
-
     const movie = isEdit
       ? movieId && (await editMovie({ data, movieId }))
       : await createMovie({ ...data } as Partial<Movie>);

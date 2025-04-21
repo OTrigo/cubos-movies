@@ -23,7 +23,7 @@ export function UploadInput({ label, name }: UploadInputProps) {
         name={name}
         type="file"
         accept="image/*"
-        className={`${theme}  mb-2 block w-full text-[var(--text-default)]`}
+        className={`${theme} mb-2 block w-full text-[var(--text-default)] text-[16px]`}
       />
     </div>
   );

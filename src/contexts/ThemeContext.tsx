@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 type Theme = "light" | "dark";
 type ThemeContextType = {
@@ -14,18 +14,27 @@ const ThemeContext = createContext<ThemeContextType>({
 });
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const defaultValue =
-    window !== undefined && window?.document?.cookie?.match("light")
-      ? "light"
-      : "dark";
+  const [theme, setTheme] = useState<Theme>("dark"); // valor inicial padrão
 
-  const [theme, setTheme] = useState<Theme>(defaultValue);
+  // Lê o cookie e define a classe no HTML quando o componente monta
+  useEffect(() => {
+    const cookieMatch = document.cookie.match(/theme=(light|dark)/);
+    const savedTheme = cookieMatch?.[1] as Theme | undefined;
+
+    const finalTheme = savedTheme ?? "dark";
+    setTheme(finalTheme);
+
+    // Aplica no <html>
+    document.documentElement.classList.remove("light", "dark");
+    document.documentElement.classList.add(finalTheme);
+  }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
-    document?.documentElement?.classList?.remove("light", "dark");
-    document?.documentElement?.classList?.add(newTheme);
+
+    document.documentElement.classList.remove("light", "dark");
+    document.documentElement.classList.add(newTheme);
     document.cookie = `theme=${newTheme}; path=/; max-age=31536000`;
   };
 

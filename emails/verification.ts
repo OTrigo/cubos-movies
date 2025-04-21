@@ -1,3 +1,5 @@
+export type emailTypes = "validation" | "confirmation" | "forgottenPassword";
+
 export const getTemplateEmail = ({
   token,
   localEnv,
@@ -5,7 +7,7 @@ export const getTemplateEmail = ({
 }: {
   token?: string;
   localEnv?: string;
-  variation: "validation" | "confirmation";
+  variation: emailTypes;
 }) => {
   const email = {
     validation: {
@@ -153,6 +155,25 @@ export const getTemplateEmail = ({
         Equipe Cubos Movies
       </div>
     </div>
+  </body>
+</html>
+`,
+    },
+    forgottenPassword: {
+      subject: "Redefinir sua senha - Cubos Movies",
+      html: `<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Clique no botão abaixo para redefinir sua senha</title>
+  </head>
+  <body>
+    <div style="text-align: center; margin: 32px 0;">
+              <a href="${localEnv === "development" ? "http://localhost:3000" : "https://cubos-movies-five.vercel.app"}/signIn/password/${token}" 
+                 style="background-color: #4f46e5; color: var(--text-default); padding: 12px 24px; border-radius: 6px; text-decoration: none; font-size: 16px;">
+                Create new password
+              </a>
+            </div>
   </body>
 </html>
 `,

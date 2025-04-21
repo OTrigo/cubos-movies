@@ -85,7 +85,6 @@ export const getUserByToken = async () => {
 export const isVerifiedUser = async () => {
   const user = await getUserByToken();
 
-
   if (user) return user?.verified;
 };
 
@@ -117,7 +116,6 @@ export const createUser = async ({
       },
     });
 
-
     if (!recordToken) return { error: "Couldn't create a token" };
 
     const sentEmail = await sendEmail({
@@ -141,24 +139,107 @@ export const validateUser = async ({
   token: string;
   email: string;
 }) => {
-  const user = await prisma.user.findUnique({ where: { email } });
+  try {
+    console.log("token", token);
+    const user = await prisma.user.findUnique({ where: { email } });
+    const isValidToken = await prisma.emailVerificationToken.findFirst({
+      where: { token, userId: user?.id },
+    });
+
+    console.log("token2", token);
+
+    if (!user || !isValidToken) return { error: "Invalid token" };
+
+    console.log("token3");
+
+    if (isValidToken.used) return { error: "Token already used" };
+
+    console.log("token4");
+
+    const updatedUser = await Promise.all([
+      await prisma.user.update({
+        where: { id: user?.id },
+        data: { verified: true },
+      }),
+      await prisma.emailVerificationToken.update({
+        where: { id: isValidToken?.id },
+        data: { used: true },
+      }),
+    ]);
+
+    console.log("updatedUser", updatedUser);
+
+    if (!updatedUser) return { error: "Couldn't update user" };
+
+    const sentEmail = await sendConfirmationEmail({ email, token });
+
+    if (!sentEmail) return { error: "Couldn't send confirmation email" };
+
+    return { success: true, data: updatedUser };
+  } catch (error) {
+    console.error(error);
+    return { error: "Couldn't validate user" };
+  }
+};
+
+export const sendNewPasswordEmail = async ({ email }: { email: string }) => {
+  try {
+    const user = await prisma.user.findUnique({ where: { email } });
+
+    if (!user) return { error: "User not found" };
+
+    const token = randomBytes(32).toString("hex");
+    const recordToken = await prisma.emailVerificationToken.create({
+      data: {
+        token,
+        userId: user?.id,
+        expiresAt: 15,
+      },
+    });
+
+    if (!recordToken) return { error: "Couldn't create a token" };
+
+    const sentEmail = await sendEmail({
+      email,
+      token,
+      variation: "forgottenPassword",
+    });
+
+    if (!sentEmail) return { error: "Couldn't send email" };
+
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return { error: "Couldn't send email" };
+  }
+};
+
+export const updatePassword = async ({
+  token,
+  password,
+}: {
+  token: string;
+  password: string;
+}) => {
   const isValidToken = await prisma.emailVerificationToken.findFirst({
-    where: { token, userId: user?.id },
+    where: { token },
   });
 
+  if (!isValidToken) return { error: "Invalid token" };
+  if (isValidToken.used) return { error: "Token already used" };
 
-  if (!user || !isValidToken) return { error: "Invalid token" };
-
-  const updatedUser = await prisma.user.update({
-    where: { id: user.id },
-    data: { verified: true },
-  });
+  const updatedUser = await Promise.all([
+    await prisma.user.update({
+      where: { id: isValidToken.userId },
+      data: { password },
+    }),
+    await prisma.emailVerificationToken.update({
+      where: { id: isValidToken.id },
+      data: { used: true },
+    }),
+  ]);
 
   if (!updatedUser) return { error: "Couldn't update user" };
 
-  const sentEmail = await sendConfirmationEmail({ email, token });
-
-  if (!sentEmail) return { error: "Couldn't send confirmation email" };
-
-  return { success: true, data: updatedUser };
+  return { success: true };
 };

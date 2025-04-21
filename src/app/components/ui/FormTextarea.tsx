@@ -12,7 +12,7 @@ export const FormTextarea = ({ label, name, ...rest }: FormTextareaProps) => (
     <textarea
       id={name}
       name={name}
-      className="w-full p-2 bg-[var(--bg-theme-2)] text-[var(--text-default)] rounded"
+      className="w-full p-2 bg-[var(--bg-theme-2)] text-[var(--text-default)] rounded resize-none appearance-none max-h-[150px] focus:outline focus:outline-[var(--bg-button-default)] text-[16px]"
       {...rest}
     />
   </div>

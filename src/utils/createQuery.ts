@@ -21,11 +21,11 @@ export const createQuery = ({
     ...(filters?.minRating && {
       rating: { gte: filters.minRating },
     }),
-    ...(filters?.releaseFrom &&
-      filters?.releaseTo && {
+    ...(filters?.minDuration &&
+      filters?.maxDuration && {
         releaseDate: {
-          gte: new Date(filters.releaseFrom),
-          lte: new Date(filters.releaseTo),
+          gte: filters.minDuration,
+          lte: filters.maxDuration,
         },
       }),
   };
