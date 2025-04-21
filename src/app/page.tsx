@@ -11,6 +11,7 @@ import { useMovieSearch } from "@/hooks/useMovie";
 import { EditFilterProps } from "@actions/movie/movieActions";
 import { useRouter } from "next/navigation";
 import Background from "@/assets/background.png";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const MoviesPage = () => {
   const { data: user, isLoading: isLoadingUser, error: errorUser } = useUser();
@@ -40,6 +41,8 @@ const MoviesPage = () => {
     pagination,
   });
 
+  const {theme} = useTheme()
+
   useEffect(() => {
     if (search) {
       refetch();
@@ -59,7 +62,7 @@ const MoviesPage = () => {
   if (!user || errorUser) return <>Redirect...</>;
 
   return (
-    <div className="flex flex-col justify-center items-center w-full bg-[#121113]">
+    <div className={`${theme} flex flex-col justify-center items-center w-full bg-[var(--bg-theme-1)]`}>
       <Modal
         title={showModal.variant === "filter" ? "Filtros" : "Adicionar Filme"}
         show={showModal.show}

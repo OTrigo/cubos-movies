@@ -12,7 +12,7 @@ const UnverifiedEmailPage = () => {
   };
 
   return (
-    <div className="flex h-[calc(100vh-140px)] justify-center items-center w-full py-[281px] bg-[#121113]">
+    <div className="flex h-[calc(100vh-140px)] justify-center items-center w-full py-[281px] bg-[var(--bg-theme-1)]">
       <div
         className="absolute z-[1] top-[72px] w-full h-[564px]"
         style={{

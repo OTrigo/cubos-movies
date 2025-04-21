@@ -6,6 +6,7 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 import { MovieFiltersModal } from "../movie/MovieFiltersModal";
 import MovieForm from "../movie/MovieForm";
 import { handleMovieForm } from "@/utils/handleMovieForm";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const Modal = ({
   show,
@@ -22,6 +23,8 @@ const Modal = ({
   setFilters: Dispatch<SetStateAction<EditFilterProps | undefined>>;
   refetch: () => void;
 }) => {
+  const { theme } = useTheme();
+
   useEffect(() => {
     if (show) {
       document.body?.classList.add("overflow-hidden");
@@ -34,13 +37,13 @@ const Modal = ({
     <>
       {show && (
         <div
-          className={`flex w-screen h-screen fixed bg-[#ffffff25] z-[9999] top-[0] backdrop-blur-[8px] ${variant === "filter" ? "justify-center" : "justify-end"} items-center`}
+          className={`${theme} flex w-screen h-screen fixed bg-[#ffffff25] z-[9999] top-[0] backdrop-blur-[8px] ${variant === "filter" ? "justify-center" : "justify-end"} items-center`}
           id="overlay"
           onClick={onClose}
         >
           {variant === "filter" ? (
             <div
-              className="flex w-fit flex-col h-fit bg-[#121113] text-[#B5B2BC] text-[16px] font-medium px-[24px] py-[16px]"
+              className={`${theme} flex w-fit flex-col h-fit bg-[var(--bg-theme-1)] text-[#B5B2BC] text-[16px] font-medium px-[24px] py-[16px]`}
               onClick={(e) => e.stopPropagation()}
             >
               <p className="flex w-full justify-between items-center">
@@ -61,7 +64,7 @@ const Modal = ({
             </div>
           ) : (
             <div
-              className="relative flex w-full md:w-[50%] flex-col h-screen bg-[#121113] text-[#B5B2BC] text-[16px] font-medium px-[24px] py-[16px]"
+              className="relative flex w-full md:w-[50%] flex-col h-screen bg-[var(--bg-theme-1)] text-[#B5B2BC] text-[16px] font-medium px-[24px] py-[16px]"
               onClick={(e) => e.stopPropagation()}
             >
               <p className="flex w-full justify-between items-center">

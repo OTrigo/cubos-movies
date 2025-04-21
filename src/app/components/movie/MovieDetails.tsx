@@ -69,7 +69,7 @@ const MovieDetails = ({ ...props }) => {
   };
 
   return (
-    <div className="relative flex flex-col w-full max-w-full lg:m-8 bg-[#121113] text-white p-4 lg:p-6 gap-6 rounded-xl shadow-xl z-10 overflow-hidden justify-center items-center">
+    <div className="relative flex flex-col w-full max-w-full lg:m-8 bg-[var(--bg-theme-1)] text-white p-4 lg:p-6 gap-6 rounded-xl shadow-xl z-10 overflow-hidden justify-center items-center">
       <div className="w-fit lg:w-full">
         <div
           className="absolute z-[1] w-full h-full"

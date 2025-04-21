@@ -42,7 +42,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center w-full py-[281px] bg-[#121113]">
+    <div className="flex justify-center items-center w-full py-[281px] bg-[var(--bg-theme-1)]">
       <div
         className="absolute z-[1] top-[72px] w-full h-[564px] p-4"
         style={{

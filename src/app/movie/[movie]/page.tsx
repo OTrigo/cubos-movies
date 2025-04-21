@@ -24,7 +24,7 @@ export default function MovieDetailsPage() {
 
   if (!data || "error" in data || isLoading)
     return (
-      <div className="flex justify-center items-center w-full bg-[#121113] flex-col px-2 animate-pulse">
+      <div className="flex justify-center items-center w-full bg-[var(--bg-theme-1)] flex-col px-2 animate-pulse">
         <div className="absolute z-[10] top-[72px] w-full h-[564px] bg-gradient-to-b from-[#121113] via-[#1c1b1e77] to-[#121113]">
           <SkeletonBlock width="w-full" height="h-full" />
         </div>
@@ -66,7 +66,7 @@ export default function MovieDetailsPage() {
           variant="edit"
         />
       </Drawer>
-      <div className="flex justify-center items-center w-full bg-[#121113] flex-col px-2">
+      <div className="flex justify-center items-center w-full bg-[var(--bg-theme-1)] flex-col px-2">
         <div
           className="absolute z-[1] top-[72px] w-full h-[564px]"
           style={{

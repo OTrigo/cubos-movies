@@ -15,17 +15,49 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #fcfcfd;
-    --color-text: #3e3d44;
-    --color-primary: #8647e1;
-    --color-secondary: #eae2fd;
+    --bg-theme-1: #fdfcfd;
+    --bg-theme-2: #faf9fb;
+    --bg-theme-3: #f2eff3;
+    --bg-theme-4: #eae7ec;
+    --bg-theme-5: #e3dfe6;
+    --bg-theme-6: #dbd8e0;
+    --bg-theme-7: #d0cdd7;
+    --bg-theme-8: #bcbac7;
+    --bg-theme-9: #8e8c99;
+    --bg-theme-10: #84828e;
+    --bg-theme-11: #65636d;
+    --bg-theme-12: #211f26;
+
+    --bg-button-default: #8e4ec6;
+    --bg-button-hover: #9a5cd0;
+    --bg-button-active: #8457aa;
+    --bg-button-disabled: #6f6d78;
+
+    --text--button-default: #fff;
+    --text--button-disabled: #ece9fd49;
+
+    --bg-button-secondary-default: #b744f708;
+    --bg-button-secondary-hover: #c150ff18;
+    --bg-button-secondary-active: #b412f904;
+    --bg-button-secondary-disabled: #ebeaf808;
+
+    --text-button-secondary-default: #f1ddff98;
+    --text-button-secondary-disabled: #ece9fd49;
   }
 
   .dark {
-    --color-bg: #161618;
-    --color-text: #ededef;
-    --color-primary: #b97aff;
-    --color-secondary: #301e41;
+    --bg-theme-1: #121113;
+    --bg-theme-2: #1A191B;
+    --bg-theme-3: #232225;
+    --bg-theme-4: #2B292D;
+    --bg-theme-5: #323035;
+    --bg-theme-6: #3C393F;
+    --bg-theme-7: #49474E;
+    --bg-theme-8: #625F69;
+    --bg-theme-9: #6F6D78;
+    --bg-theme-10: #7C7A85;
+    --bg-theme-11: #B5B2BC;
+    --bg-theme-12: #EEEEF0;
   }
 }
 
