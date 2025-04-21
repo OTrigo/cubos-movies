@@ -28,7 +28,7 @@ export const getUserByCredentials = async ({
   password,
 }: UserCredentials) => {
   const query = emailOrName.includes("@")
-    ? { emailOrName: emailOrName }
+    ? { email: emailOrName }
     : { name: emailOrName };
 
   try {
@@ -140,21 +140,14 @@ export const validateUser = async ({
   email: string;
 }) => {
   try {
-    console.log("token", token);
     const user = await prisma.user.findUnique({ where: { email } });
     const isValidToken = await prisma.emailVerificationToken.findFirst({
       where: { token, userId: user?.id },
     });
 
-    console.log("token2", token);
-
     if (!user || !isValidToken) return { error: "Invalid token" };
 
-    console.log("token3");
-
     if (isValidToken.used) return { error: "Token already used" };
-
-    console.log("token4");
 
     const updatedUser = await Promise.all([
       await prisma.user.update({
@@ -166,8 +159,6 @@ export const validateUser = async ({
         data: { used: true },
       }),
     ]);
-
-    console.log("updatedUser", updatedUser);
 
     if (!updatedUser) return { error: "Couldn't update user" };
 
@@ -228,10 +219,12 @@ export const updatePassword = async ({
   if (!isValidToken) return { error: "Invalid token" };
   if (isValidToken.used) return { error: "Token already used" };
 
+  const encryptedPassword = await bcrypt.hash(password, 10);
+
   const updatedUser = await Promise.all([
     await prisma.user.update({
       where: { id: isValidToken.userId },
-      data: { password },
+      data: { password: encryptedPassword },
     }),
     await prisma.emailVerificationToken.update({
       where: { id: isValidToken.id },

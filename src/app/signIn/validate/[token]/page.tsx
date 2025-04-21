@@ -17,10 +17,8 @@ const UnverifiedEmailPage = () => {
   const token = useParams().token as string;
 
   const confirmAccount = async () => {
-    console.log("teste");
     if (!user) return;
 
-    console.log("teste2");
     await validateUser({
       email: user.email,
       token: token ?? "",

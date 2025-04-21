@@ -18,6 +18,7 @@ const NewPasswordPage = () => {
   const router = useRouter();
 
   const handleNewPassword = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
     const data = {
@@ -37,7 +38,7 @@ const NewPasswordPage = () => {
 
     if (!updatedPass) return;
 
-    router.replace("/signIn");
+    router.replace("/");
   };
 
   return (
