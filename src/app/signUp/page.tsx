@@ -1,24 +1,16 @@
 "use client";
 
 import { createUser } from "@actions/user/userActions";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { z } from "zod";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useUser } from "@/hooks/useUser";
 import Background from "@/assets/background.png";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
-  const { data: user, isLoading, error } = useUser();
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const router = useRouter();
-
-  useEffect(() => {
-    if (user) router.replace("/");
-    return;
-  }, [isLoading, error, user, router]);
-
-  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleNewUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -66,7 +58,7 @@ const LoginPage = () => {
 
     if (!login) return;
 
-    router.replace("/");
+    router.replace("/signIn");
 
     return;
   };

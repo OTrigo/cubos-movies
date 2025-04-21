@@ -1,4 +1,6 @@
 import { createMovie, editMovie } from "@actions/movie/movieActions";
+import { Movie } from "@prisma/client";
+import { normalizeValue } from "./normalizeData";
 
 export const handleMovieForm = async (
   e: React.FormEvent<HTMLFormElement>,
@@ -9,14 +11,10 @@ export const handleMovieForm = async (
 
   const formData = new FormData(e.currentTarget);
 
-  console.log({ formData });
-
   const images = new FormData();
 
   images.append("image", formData.get("image") as File);
   images.append("banner", formData.get("banner") as File);
-
-  console.log({ images: images.get("image") });
 
   try {
     const uploadFile = await fetch("/api/v1/upload", {
@@ -24,41 +22,40 @@ export const handleMovieForm = async (
       body: images,
     });
 
-    const uploadData = await uploadFile.json();
+    const uploadData = uploadFile.ok && (await uploadFile?.json());
 
-    console.log({ uploadData });
-
-    const imageUrl = uploadData?.upload?.imageUrl as string;
-    const bannerUrl = uploadData?.upload?.bannerUrl as string;
+    const imageUrl = uploadData?.upload?.imageUrl;
+    const bannerUrl = uploadData?.upload?.bannerUrl;
 
     const baseData = {
-      friendlyTitle: formData.get("friendlyTitle") as string,
-      fullTitle: formData.get("fullTitle") as string,
-      sinopsys: formData.get("sinopsys") as string,
-      releaseDate:
-        (formData.get("releaseDate") as string) || new Date().toISOString(),
+      friendlyTitle: normalizeValue(formData.get("friendlyTitle")),
+      fullTitle: normalizeValue(formData.get("fullTitle")),
+      sinopsys: normalizeValue(formData.get("sinopsys")),
+      releaseDate: normalizeValue(formData.get("releaseDate")),
       durationTime: Number(formData.get("durationTime")),
-      status: formData.get("status") as string,
-      language: formData.get("language") as string,
+      status: normalizeValue(formData.get("status")),
+      language: normalizeValue(formData.get("language")),
       budget: Number(formData.get("budget")),
       revenue: Number(formData.get("revenue")),
       profit: Number(formData.get("profit")),
-      tags: formData.get("tags") as string,
+      tags: normalizeValue(formData.get("tags")),
       rating: Number(formData.get("rating")),
-      trailer: formData.get("trailer") as string,
-      votes: formData.get("votes") as string,
-      phrase: formData.get("phrase") as string,
+      trailer: normalizeValue(formData.get("trailer")),
+      votes: normalizeValue(formData.get("votes")),
+      phrase: normalizeValue(formData.get("phrase")),
     };
 
     const data = {
       ...baseData,
-      ...(imageUrl ? { image: imageUrl as string } : {}),
-      ...(bannerUrl ? { banner: bannerUrl as string } : {}),
-    };
+      ...(imageUrl && { image: imageUrl as string }),
+      ...(bannerUrl && { banner: bannerUrl as string }),
+    } as Partial<Movie>;
+
+    console.log({ data });
 
     const movie = isEdit
       ? movieId && (await editMovie({ data, movieId }))
-      : await createMovie({ ...data });
+      : await createMovie({ ...data } as Partial<Movie>);
 
     if (!movie) {
       console.error("Couldn't create movie");

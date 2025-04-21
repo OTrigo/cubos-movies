@@ -9,8 +9,6 @@ const MoviePagination = ({
   setPagination: Dispatch<SetStateAction<number>>;
   totalPages: number;
 }) => {
-  console.log({ pagination, totalPages });
-
   return (
     <div className="w-full flex justify-center items-center gap-3 p-6">
       <button

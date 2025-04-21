@@ -13,13 +13,11 @@ const UnverifiedEmailPage = () => {
 
   const confirmAccount = async () => {
     if (!user) return;
-    const validate = await validateUser({
+    await validateUser({
       email: user.email,
       token: token ?? "",
     });
-
-    console.log(validate);
-    // await refetch();
+    await refetch();
   };
 
   return (
@@ -47,7 +45,10 @@ const UnverifiedEmailPage = () => {
           </span>
           <button
             className="outline hover:outline-[#8E4EC6] hover:bg-[#8E4EC6] transition-all duration-300 cursor-pointer py-4 w-full text-[16px] font-bold"
-            onClick={confirmAccount}
+            onClick={(e) => {
+              e.preventDefault();
+              confirmAccount();
+            }}
           >
             Entrar na cubos
           </button>

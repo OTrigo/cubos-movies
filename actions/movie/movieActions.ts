@@ -2,7 +2,7 @@
 
 import { getUserIdFromToken } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { UUID } from "crypto";
+import { Movie } from "@prisma/client";
 
 export type FilterProps = {
   label: string;
@@ -22,25 +22,6 @@ type GetMovieProps = {
   pagination: number;
   filters: EditFilterProps;
 };
-
-interface MovieProps {
-  id: UUID;
-  friendlyTitle: string;
-  fullTitle: string;
-  sinopsys: string;
-  releaseDate: string;
-  durationTime: number;
-  status: string;
-  language: string;
-  budget: number;
-  revenue: number;
-  profit: number;
-  tags: string;
-  rating: number;
-  trailer: string;
-  image: string;
-  banner: string;
-}
 
 export const getMovies = async ({ filters, pagination }: GetMovieProps) => {
   try {
@@ -133,7 +114,7 @@ export const getMovieBySearch = async ({
   }
 };
 
-export const createMovie = async (props: Partial<MovieProps>) => {
+export const createMovie = async (props: Partial<Movie>) => {
   const user = await getUserIdFromToken();
 
   const {
@@ -141,17 +122,19 @@ export const createMovie = async (props: Partial<MovieProps>) => {
     durationTime = 0,
     friendlyTitle = "No data",
     fullTitle = "No data",
-    image = "No data",
+    image = undefined,
     language = "No data",
     profit = 0,
     rating = 0,
-    releaseDate,
+    releaseDate = undefined,
     revenue = 0,
     sinopsys = "No data",
     status = "No data",
     tags = "No data",
     trailer = "No data",
-    banner = "No data",
+    banner = undefined,
+    votes = "No data",
+    phrase = "No data",
   } = props;
 
   const release = new Date(releaseDate ?? "");
@@ -163,7 +146,6 @@ export const createMovie = async (props: Partial<MovieProps>) => {
         durationTime,
         friendlyTitle,
         fullTitle,
-        image,
         language,
         profit,
         rating,
@@ -173,8 +155,11 @@ export const createMovie = async (props: Partial<MovieProps>) => {
         status,
         trailer,
         tags,
-        banner,
+        votes,
+        phrase,
         authorId: user?.userId ?? "",
+        ...(banner && { banner }),
+        ...(image && { image }),
       },
     });
 
@@ -188,16 +173,36 @@ export const editMovie = async ({
   data,
   movieId,
 }: {
-  data: Record<string, unknown>;
+  data: Partial<Movie>;
   movieId: string;
 }) => {
+
+  const filteredData: Partial<Movie> = Object.fromEntries(
+    Object.entries(data).filter(([_, value]) => {
+      const isInvalid =
+        value === undefined ||
+        value === null ||
+        value === "" ||
+        (typeof value === "number" && isNaN(value));
+      return !isInvalid;
+    })
+  );
+
+  if (filteredData?.releaseDate) {
+    filteredData.releaseDate = new Date(filteredData.releaseDate);
+  }
+
+  console.log({ data, movieId });
+
   try {
-    const movie = prisma.movie.update({
+    const movie = await prisma.movie.update({
       where: {
         id: movieId,
       },
-      data: { ...data, releaseDate: new Date(data.releaseDate as string) },
+      data: filteredData,
     });
+
+    console.log({ editedMovie: movie });
 
     return { success: true, data: movie };
   } catch (error) {
@@ -212,8 +217,6 @@ export const getMovieById = async (movieId: string) => {
         id: movieId,
       },
     });
-
-    console.log(movie);
 
     return movie;
   } catch (error) {

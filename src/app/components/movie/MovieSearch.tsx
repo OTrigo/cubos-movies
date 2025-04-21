@@ -65,7 +65,7 @@ const MovieSearch = ({
         Filtros
       </button>
       <button
-        className="h-[44px] w-[151px] px-[20px] py-[12px] bg-[#8E4EC6] backdrop-blur-xs cursor-pointer"
+        className="h-[44px] w-fit px-[20px] py-[12px] bg-[#8E4EC6] backdrop-blur-xs cursor-pointer"
         onClick={() => setShowModal({ show: true, variant: "add" })}
       >
         Adicionar Filme

@@ -43,9 +43,10 @@ export const getUserByCredentials = async ({
 
     if (!isValid) return { error: "Invalid Password" };
 
-    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, {
-      expiresIn: "3d",
-    });
+    const token = jwt.sign(
+      { id: user?.id, email: user?.email, verified: user?.verified },
+      JWT_SECRET
+    );
 
     const cookieStore = await cookies();
 
@@ -84,6 +85,7 @@ export const getUserByToken = async () => {
 export const isVerifiedUser = async () => {
   const user = await getUserByToken();
 
+
   if (user) return user?.verified;
 };
 
@@ -106,9 +108,15 @@ export const createUser = async ({
     if (!newUser) return { error: "Couldn't create user" };
 
     const token = randomBytes(32).toString("hex");
-    const recordToken = prisma.emailVerificationToken.create({
-      data: { token, userId: newUser.id, expiresAt: 15 },
+    const recordToken = await prisma.emailVerificationToken.create({
+      data: {
+        token,
+        userId: "3b78e2f4-d694-4b40-9a55-ef2b8cd7795a",
+        expiresAt: 15,
+        used: false,
+      },
     });
+
 
     if (!recordToken) return { error: "Couldn't create a token" };
 
@@ -138,7 +146,6 @@ export const validateUser = async ({
     where: { token, userId: user?.id },
   });
 
-  console.log({ user, isValidToken });
 
   if (!user || !isValidToken) return { error: "Invalid token" };
 

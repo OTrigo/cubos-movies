@@ -1,12 +1,12 @@
-import { User } from "@prisma/client";
-import jwt from "jsonwebtoken";
+// lib/verifyJWT.middleware.ts
+import { jwtVerify } from "jose";
 
-const SECRET = process.env.JWT_SECRET!;
+const SECRET = new TextEncoder().encode(process.env.JWT_SECRET);
 
-export function verifyJWT(token: string) {
+export async function verifyJwt(token: string) {
   try {
-    const decoded = jwt.verify(token, SECRET) as User;
-    return decoded;
+    const { payload } = await jwtVerify(token, SECRET);
+    return payload;
   } catch (err) {
     return err;
   }

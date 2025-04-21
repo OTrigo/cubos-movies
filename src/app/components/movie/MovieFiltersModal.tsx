@@ -34,7 +34,6 @@ export function MovieFiltersModal({
     );
 
     setFilters(filtered as EditFilterProps);
-    console.log(filtered);
     onClose();
     refetch();
   };

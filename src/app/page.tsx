@@ -41,7 +41,6 @@ const MoviesPage = () => {
   });
 
   useEffect(() => {
-    console.log(search);
     if (search) {
       refetch();
     }
@@ -54,8 +53,6 @@ const MoviesPage = () => {
     show: false,
     variant: "",
   });
-
-  console.log({ user, errorUser });
 
   if (isLoadingUser || isLoadingMovie || errorMovie) return <p>...</p>;
 

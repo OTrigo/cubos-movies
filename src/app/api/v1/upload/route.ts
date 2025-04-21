@@ -1,30 +1,5 @@
-import { s3 } from "@/lib/s3";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { uploadFile } from "@actions/upload/uploadActions";
 import { NextRequest, NextResponse } from "next/server";
-
-const uploadFile = async (file: Buffer, name: string, type: string) => {
-  const params = {
-    Bucket: process.env.AWS_BUCKET_NAME!,
-    Key: name,
-    Body: file,
-    ContentType: type,
-  };
-
-  console.log({ params });
-
-  try {
-    const command = new PutObjectCommand(params);
-    const response = await s3.send(command);
-
-    console.log({ response });
-
-    if (!response) return { error: "Couldn't upload the file" };
-
-    return `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_BUCKET_REGION}.amazonaws.com/${name}`;
-  } catch (error) {
-    return { error };
-  }
-};
 
 export async function POST(req: NextRequest) {
   try {
@@ -33,17 +8,14 @@ export async function POST(req: NextRequest) {
     const imageFile = formData?.get("image") as File;
     const bannerFile = formData?.get("banner") as File;
 
-    console.log();
-
-    if (!imageFile || !bannerFile)
+    if (!imageFile || !bannerFile) {
       return NextResponse.json(
         { error: "Couldn't get the files" },
         {
           status: 400,
         }
       );
-
-    console.info({ imageFile, bannerFile });
+    }
 
     const imageBuffer = Buffer?.from(await imageFile?.arrayBuffer());
     const bannerBuffer = Buffer?.from(await bannerFile?.arrayBuffer());
@@ -59,7 +31,8 @@ export async function POST(req: NextRequest) {
       bannerFile?.type
     );
 
-    console.log({ imageUrl, bannerUrl });
+    if (!imageUrl || !bannerUrl)
+      return NextResponse.json({ error: "No imageUrl or bannerUrl" });
 
     const data = {
       imageUrl,

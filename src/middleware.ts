@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyJWT } from "@/lib/verifyJWT";
+import { verifyJwt } from "@/lib/verifyJWT";
 import { User } from "@prisma/client";
 
 export async function middleware(request: NextRequest) {
@@ -15,23 +15,28 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const user = (await verifyJWT(token)) as User;
+  const user = (await verifyJwt(token)) as User;
 
   if (!user) {
     return NextResponse.redirect(new URL("/signIn", request.url));
-  }
-
-  if (user && !user.verified && pathname !== "/signIn/validate") {
-    return NextResponse.redirect(new URL("/signIn/validate", request.url));
-  }
-
-  if (user && user.verified && pathname === "/signIn/validate") {
-    return NextResponse.redirect(new URL("/movies", request.url));
+  } else if (
+    user &&
+    !user.verified &&
+    pathname !== `/signIn/${user.email}` &&
+    !pathname.includes("/validate")
+  ) {
+    return NextResponse.redirect(new URL(`/signIn/${user.email}`, request.url));
+  } else if (
+    user &&
+    user.verified &&
+    (pathname.includes("/signIn") || pathname.includes("/signUp"))
+  ) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/", "/movies/:path*", "/signIn/validate"],
+  matcher: ["/", "/signUp/:path*", "/movies/:path*", "/signIn/:path*"],
 };
