@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyJwt } from "@/lib/verifyJWT";
-import { User } from "@prisma/client";
 
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get("session-token")?.value;
@@ -15,7 +14,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const user = (await verifyJwt(token)) as User;
+  const user = (await verifyJwt(token)) as {verified: boolean, email: string};
 
   if (!user) {
     return NextResponse.redirect(new URL("/signIn", request.url));
