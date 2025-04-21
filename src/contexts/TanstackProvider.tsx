@@ -1,5 +1,4 @@
 "use client";
-import { useTheme } from "@/contexts/ThemeContext";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode, useState } from "react";
