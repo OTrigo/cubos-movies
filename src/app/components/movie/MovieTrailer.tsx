@@ -8,7 +8,7 @@ const MovieTrailer = ({
   const idFromTrailer = trailer?.split("=")[1];
 
   return (
-    <div className="relative flex flex-col w-full max-w-full m-8 bg-[var(--bg-theme-1)] text-white p-6 gap-6 rounded-xl shadow-xl z-10 overflow-hidden">
+    <div className="relative flex flex-col w-full max-w-full m-8 bg-[var(--bg-theme-1)] text-[var(--text-default)] p-6 gap-6 rounded-xl shadow-xl z-10 overflow-hidden">
       <p className="text-3xl font-bold">{title}</p>
       <div className="h-[382px] md:h-[556] w-full aspect-video">
         {trailer?.includes("youtube") && (
@@ -20,7 +20,7 @@ const MovieTrailer = ({
         )}
         {!trailer?.includes("youtube") && (
           <div className="flex justify-center items-center">
-            <p className="text-lg text-white">
+            <p className="text-lg text-[var(--text-default)]">
               Não foi possível carregar o trailer.
             </p>
           </div>

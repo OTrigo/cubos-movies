@@ -47,10 +47,10 @@ const LoginPage = () => {
 
   return (
     <div
-      className={`${theme} flex justify-center items-center w-full py-[281px] bg-[var(--bg-theme-1)]`}
+      className={`${theme} h-full flex justify-center items-center w-full py-[281px] bg-[var(--bg-theme-1)]`}
     >
       <div
-        className={`${theme} absolute z-[1] top-[72px] w-full h-[564px] p-4`}
+        className={`${theme}  absolute z-[1] top-[72px] w-full h-[564px] p-4`}
         style={{
           background:
             "linear-gradient(180deg, var(--bg-theme-1) 0%, rgba(18, 17, 19, 0.46) 49.48%, var(--bg-theme-1) 100%)",
@@ -58,7 +58,7 @@ const LoginPage = () => {
       />
 
       <Image
-        className={`${theme} absolute z-[0] h-full top-[72px] w-full max-h-[564px] object-cover opacity-40`}
+        className={`${theme}  absolute z-[0] h-full top-[72px] w-full max-h-[564px] object-cover opacity-40`}
         src={Background}
         alt="Cubos Movies Background"
         width={1440}
@@ -66,41 +66,45 @@ const LoginPage = () => {
       />
 
       <form
-        className={`${theme} relative max-w-screen flex-grow md:flex-grow-[0] mx-4 z-10 flex flex-col gap-4 w-fit bg-[var(--bg-theme-3)] p-4 rounded-1`}
+        className={`${theme}  relative max-w-screen flex-grow md:flex-grow-[0] mx-4 z-10 flex flex-col gap-4 w-fit bg-[var(--bg-theme-3)] p-4 rounded-1`}
         onSubmit={(e) => handleLoginValidation(e)}
       >
-        <label className={`${theme} flex flex-col gap-2 h-[67px]`}>
-          <span className={`${theme} text-white text-[12.8px] font-bold`}>
+        <label className={`${theme}  flex flex-col gap-2 h-[67px]`}>
+          <span
+            className={`${theme}  text-[var(--text-default)] text-[12.8px] font-bold`}
+          >
             Nome/E-mail
           </span>
           <input
-            className={`${theme} bg-[var(--bg-theme-2)] text-[#6F6D78] w-full md:w-[380px] h-[44px] min-h-[44px] rounded-[4px] p-3 border border-solid`}
+            className={`${theme}  bg-[var(--bg-theme-2)] text-[#6F6D78] w-full md:w-[380px] h-[44px] min-h-[44px] rounded-[4px] p-3 border border-solid`}
             type="text"
             name="emailOrName"
             placeholder="Digite seu nome/E-mail"
           />
         </label>
         {errors.email && <>Invalid Email</>}
-        <label className={`${theme} flex flex-col gap-2 h-[67px]`}>
-          <span className={`${theme} text-white text-[12.8px] font-bold`}>
+        <label className={`${theme}  flex flex-col gap-2 h-[67px]`}>
+          <span
+            className={`${theme}  text-[var(--text-default)] text-[12.8px] font-bold`}
+          >
             Senha
           </span>
           <input
-            className={`${theme} bg-[var(--bg-theme-2)] text-[#6F6D78] w-full md:w-[380px] h-[44px] min-h-[44px] rounded-[4px] p-3 border border-solid`}
+            className={`${theme}  bg-[var(--bg-theme-2)] text-[#6F6D78] w-full md:w-[380px] h-[44px] min-h-[44px] rounded-[4px] p-3 border border-solid`}
             type="password"
             name="password"
             placeholder="Digite sua senha"
           />
         </label>
         {errors.password && <>Invalid Pass</>}
-        <div className={`${theme} flex justify-between`}>
+        <div className={`${theme}  flex justify-between`}>
           <span
-            className={`${theme} text-[16px] underline text-[var(--bg-button-default)] !text-[var(--text-button-default)] disabled:text-[var(--text--button-disabled)] disabled:bg-[var(--bg-button-disabled)] hover:bg-[var(--bg-button-hover)] active:bg-[var(--bg-button-active)]] cursor-pointer`}
+            className={`${theme}  text-[16px] underline text-[var(--bg-button-default)] !text-[var(--text-button-default)] disabled:text-[var(--text--button-disabled)] disabled:bg-[var(--bg-button-disabled)] hover:bg-[var(--bg-button-hover)] active:bg-[var(--bg-button-active)]] cursor-pointer`}
           >
             {"Esqueci minha senha"}
           </span>
           <button
-            className={`${theme} bg-[var(--bg-button-default)] !text-[var(--text-button-default)] disabled:text-[var(--text--button-disabled)] disabled:bg-[var(--bg-button-disabled)] hover:bg-[var(--bg-button-hover)] active:bg-[var(--bg-button-active)]] w-[110px] h-[44px] cursor-pointer`}
+            className={`${theme}  bg-[var(--bg-button-default)] !text-[var(--text-button-default)] disabled:text-[var(--text--button-disabled)] disabled:bg-[var(--bg-button-disabled)] hover:bg-[var(--bg-button-hover)] active:bg-[var(--bg-button-active)]] w-[110px] h-[44px] cursor-pointer`}
           >
             Entrar
           </button>

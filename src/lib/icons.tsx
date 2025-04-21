@@ -11,63 +11,63 @@ export const Sun = () => {
         cx="12"
         cy="12"
         r="3"
-        fill="#F1DDFF"
+        fill="var(--text-button-secondary-default)"
         fillOpacity="0.98"
-        stroke="#EEEEF0"
+        stroke="var(--bg-theme-12)"
         strokeWidth="2"
       />
       <path
         d="M12 5V3"
-        stroke="#F1DDFF"
+        stroke="var(--svg-color)"
         strokeOpacity="0.98"
         strokeWidth="2"
         strokeLinecap="round"
       />
       <path
         d="M12 21V19"
-        stroke="#F1DDFF"
+        stroke="var(--svg-color)"
         strokeOpacity="0.98"
         strokeWidth="2"
         strokeLinecap="round"
       />
       <path
         d="M16.95 7.04996L18.3643 5.63574"
-        stroke="#F1DDFF"
+        stroke="var(--svg-color)"
         strokeOpacity="0.98"
         strokeWidth="2"
         strokeLinecap="round"
       />
       <path
         d="M5.63608 18.3644L7.05029 16.9502"
-        stroke="#F1DDFF"
+        stroke="var(--svg-color)"
         strokeOpacity="0.98"
         strokeWidth="2"
         strokeLinecap="round"
       />
       <path
         d="M19 12L21 12"
-        stroke="#F1DDFF"
+        stroke="var(--svg-color)"
         strokeOpacity="0.98"
         strokeWidth="2"
         strokeLinecap="round"
       />
       <path
         d="M3 12L5 12"
-        stroke="#F1DDFF"
+        stroke="var(--svg-color)"
         strokeOpacity="0.98"
         strokeWidth="2"
         strokeLinecap="round"
       />
       <path
         d="M16.95 16.95L18.3643 18.3643"
-        stroke="#F1DDFF"
+        stroke="var(--svg-color)"
         strokeOpacity="0.98"
         strokeWidth="2"
         strokeLinecap="round"
       />
       <path
         d="M5.63608 5.63559L7.05029 7.0498"
-        stroke="#F1DDFF"
+        stroke="var(--svg-color)"
         strokeOpacity="0.98"
         strokeWidth="2"
         strokeLinecap="round"
@@ -88,14 +88,14 @@ export const Close = () => {
       >
         <path
           d="M18 6L6 18"
-          stroke="white"
+          stroke="var(--text-default)"
           strokeWidth="2"
           strokeLinecap="square"
           strokeLinejoin="round"
         />
         <path
           d="M6 6L18 18"
-          stroke="white"
+          stroke="var(--text-default)"
           strokeWidth="2"
           strokeLinecap="square"
           strokeLinejoin="round"
@@ -140,11 +140,11 @@ export const SearchIcon = () => {
         fillRule="evenodd"
         clipRule="evenodd"
         d="M11 18C14.866 18 18 14.866 18 11C18 7.13401 14.866 4 11 4C7.13401 4 4 7.13401 4 11C4 14.866 7.13401 18 11 18ZM11 6C10.3434 6 9.69321 6.12933 9.08658 6.3806C8.47995 6.63188 7.92876 7.00017 7.46447 7.46447C7.00017 7.92876 6.63188 8.47996 6.3806 9.08658C6.12933 9.69321 6 10.3434 6 11C6 11.5523 6.44772 12 7 12C7.55228 12 8 11.5523 8 11C8 10.606 8.0776 10.2159 8.22836 9.85195C8.37913 9.48797 8.6001 9.15726 8.87868 8.87868C9.15726 8.6001 9.48797 8.37913 9.85195 8.22836C10.2159 8.0776 10.606 8 11 8C11.5523 8 12 7.55228 12 7C12 6.44772 11.5523 6 11 6Z"
-        fill="#B5B2BC"
+        fill="var(--bg-theme-11)"
       />
       <path
         d="M20 20L18 18"
-        stroke="#B5B2BC"
+        stroke="var(--bg-theme-11)"
         strokeWidth="2"
         strokeLinecap="round"
       />

@@ -9,7 +9,9 @@ const ContentBlock = ({
   id?: string;
 }) => {
   return (
-    <div className={`flex flex-col bg-[var(--bg-theme-3)60] ${className}`}>
+    <div
+      className={`flex flex-col bg-[var(--bg-theme-3-opacity)] ${className}`}
+    >
       <p>{title ?? "Title"}</p>
       <p className="font-montserrat font-normal text-base leading-none tracking-normal">
         {description ?? "Description"}

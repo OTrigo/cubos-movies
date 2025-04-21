@@ -21,7 +21,7 @@ describe("ContentBlock", () => {
     const divElement = container.firstChild;
     expect(divElement).toHaveClass("flex");
     expect(divElement).toHaveClass("flex-col");
-    expect(divElement).toHaveClass("bg-[var(--bg-theme-3)60]");
+    expect(divElement).toHaveClass("bg-[var(--bg-theme-3-opacity)]");
   });
 
   test("aplica classes CSS adicionais quando fornecidas", () => {
@@ -36,7 +36,7 @@ describe("ContentBlock", () => {
     const divElement = container.firstChild;
     expect(divElement).toHaveClass("flex");
     expect(divElement).toHaveClass("flex-col");
-    expect(divElement).toHaveClass("bg-[var(--bg-theme-3)60]");
+    expect(divElement).toHaveClass("bg-[var(--bg-theme-3-opacity)]");
     expect(divElement).toHaveClass("p-4");
     expect(divElement).toHaveClass("rounded-md");
   });

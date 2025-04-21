@@ -22,12 +22,19 @@ describe("UploadInput", () => {
     const input = container.querySelector(
       'input[type="file"]'
     ) as HTMLInputElement;
-    expect(input).toHaveClass("mb-2", "block", "w-full", "text-white");
+    expect(input).toHaveClass(
+      "mb-2",
+      "block",
+      "w-full",
+      "text-[var(--text-default)]"
+    );
   });
 
   it("does not crash when no files are selected", () => {
     render(<UploadInput label="Banner" name="banner" />);
-    const input = screen?.getByLabelText("Banner", { selector: "input" }) as HTMLInputElement;
+    const input = screen?.getByLabelText("Banner", {
+      selector: "input",
+    }) as HTMLInputElement;
     if (input?.files) expect(input.files).toHaveLength(0);
   });
 });

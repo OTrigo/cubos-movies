@@ -18,7 +18,7 @@ describe("FormTextarea", () => {
     expect(textarea).toHaveClass("w-full");
     expect(textarea).toHaveClass("p-2");
     expect(textarea).toHaveClass("bg-[var(--bg-theme-2)]");
-    expect(textarea).toHaveClass("text-white");
+    expect(textarea).toHaveClass("text-[var(--text-default)]");
     expect(textarea).toHaveClass("rounded");
   });
 

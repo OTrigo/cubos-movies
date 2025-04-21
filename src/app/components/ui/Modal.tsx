@@ -37,26 +37,26 @@ const Modal = ({
     <>
       {show && (
         <div
-          className={`${theme} flex w-screen h-screen fixed bg-[#ffffff25] z-[9999] top-[0] backdrop-blur-[8px] ${variant === "filter" ? "justify-center" : "justify-end"} items-center`}
+          className={`${theme}  flex w-screen h-screen fixed bg-[#ffffff25] z-[9999] top-[0] backdrop-blur-[8px] ${variant === "filter" ? "justify-center" : "justify-end"} items-center`}
           id="overlay"
           onClick={onClose}
         >
           {variant === "filter" ? (
             <div
-              className={`${theme} flex w-fit flex-col h-fit bg-[var(--bg-theme-1)] text-[#B5B2BC] text-[16px] font-medium px-[24px] py-[16px]`}
+              className={`${theme}  flex w-fit flex-col h-fit bg-[var(--bg-theme-1)] text-[var(--bg-theme-11)] text-[16px] font-medium px-[24px] py-[16px]`}
               onClick={(e) => e.stopPropagation()}
             >
               <p
-                className={`${theme} flex w-full justify-between items-center`}
+                className={`${theme}  flex w-full justify-between items-center`}
               >
-                <span className={`${theme} text-[20px]`} onClick={() => {}}>
+                <span className={`${theme}  text-[20px]`} onClick={() => {}}>
                   {title}
                 </span>
                 <button onClick={onClose}>
                   <Close />
                 </button>
               </p>
-              <div className={`${theme} flex w-full h-full flex-col`}>
+              <div className={`${theme}  flex w-full h-full flex-col`}>
                 <MovieFiltersModal
                   setFilters={setFilters}
                   onClose={onClose}
@@ -66,16 +66,19 @@ const Modal = ({
             </div>
           ) : (
             <div
-              className={`${theme} relative flex w-full md:w-[50%] flex-col h-screen bg-[var(--bg-theme-1)] text-[#B5B2BC] text-[16px] font-medium px-[24px] py-[16px]`}
+              className={`${theme}  relative flex w-full md:w-[50%] flex-col h-screen bg-[var(--bg-theme-1)] text-[var(--bg-theme-11)] text-[16px] font-medium px-[24px] py-[16px]`}
               onClick={(e) => e.stopPropagation()}
             >
               <p
-                className={`${theme} flex w-full justify-between items-center`}
+                className={`${theme}  flex w-full justify-between items-center`}
               >
-                <span className={`${theme} text-[20px]`} onClick={() => {}}>
+                <span className={`${theme}  text-[20px]`} onClick={() => {}}>
                   {title}
                 </span>
-                <button className={`${theme} cursor-pointer`} onClick={onClose}>
+                <button
+                  className={`${theme}  cursor-pointer`}
+                  onClick={onClose}
+                >
                   <Close />
                 </button>
               </p>

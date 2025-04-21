@@ -11,7 +11,7 @@ import { useParams } from "next/navigation";
 import MovieForm from "@/app/components/movie/MovieForm";
 import { handleMovieForm } from "@/utils/handleMovieForm";
 import Background from "@/assets/background.png";
-import SkeletonBlock from "@/app/components/ui/SkeletonBlock";
+import MovieSkeleton from "@/app/components/ui/skeletons/MovieSkeleton";
 
 export default function MovieDetailsPage() {
   const { movie }: { movie: string } = useParams();
@@ -25,29 +25,7 @@ export default function MovieDetailsPage() {
 
   const { data, refetch, isLoading } = useMovie({ movieId: movie ?? "" });
 
-  if (!data || "error" in data || isLoading)
-    return (
-      <div className={`${theme} flex justify-center items-center w-full bg-[var(--bg-theme-1)] flex-col px-2 animate-pulse`}>
-        <div className={`${theme} absolute z-[10] top-[72px] w-full h-[564px] bg-gradient-to-b from-[var(--bg-theme-1)] via-[#1c1b1e77] to-[var(--bg-theme-1)]`}>
-          <SkeletonBlock width="w-full" height="h-full" />
-        </div>
-        <div className={`${theme} absolute z-[0] top-[72px] w-full max-h-[564px] bg-gray-800 opacity-30`} />
-
-        <div className={`${theme} mt-[600px] w-full max-w-4xl px-4 space-y-6`}>
-          <SkeletonBlock width="w-1/2" height="h-10" />
-          <SkeletonBlock width="w-3/4" height="h-6" />
-          <SkeletonBlock />
-          <SkeletonBlock />
-          <SkeletonBlock width="w-5/6" />
-          <SkeletonBlock width="w-1/4" height="h-10" className={`${theme} mt-4`} />
-        </div>
-
-        <div className={`${theme} mt-10 w-full max-w-4xl px-4 space-y-4`}>
-          <SkeletonBlock width="w-1/3" height="h-6" />
-          <SkeletonBlock height="h-48" />
-        </div>
-      </div>
-    );
+  if (!data || "error" in data || isLoading) return <MovieSkeleton />;
 
   const movieData = {
     ...data,
@@ -69,9 +47,11 @@ export default function MovieDetailsPage() {
           variant="edit"
         />
       </Drawer>
-      <div className={`${theme} flex justify-center items-center w-full bg-[var(--bg-theme-1)] flex-col px-2`}>
+      <div
+        className={`${theme}  flex justify-center items-center w-full bg-[var(--bg-theme-1)] flex-col px-2`}
+      >
         <div
-          className={`${theme} absolute z-[1] top-[72px] w-full h-[564px]`}
+          className={`${theme}  absolute z-[1] top-[72px] w-full h-[564px]`}
           style={{
             background:
               "linear-gradient(180deg, var(--bg-theme-1) 0%, rgba(18, 17, 19, 0.46) 49.48%, var(--bg-theme-1) 100%)",
@@ -79,7 +59,7 @@ export default function MovieDetailsPage() {
         />
 
         <Image
-          className={`${theme} absolute z-[0] h-full top-[72px] w-full max-h-[564px] object-cover opacity-40`}
+          className={`${theme}  absolute z-[0] h-full top-[72px] w-full max-h-[564px] object-cover opacity-40`}
           src={Background}
           alt="Cubos Movies Background"
           width={1440}

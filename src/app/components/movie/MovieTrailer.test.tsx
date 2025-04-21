@@ -85,6 +85,6 @@ describe("MovieTrailer", () => {
       "Não foi possível carregar o trailer."
     );
     expect(errorMessage).toHaveClass("text-lg");
-    expect(errorMessage).toHaveClass("text-white");
+    expect(errorMessage).toHaveClass("text-[var(--text-default)]");
   });
 });

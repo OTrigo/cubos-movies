@@ -1,3 +1,6 @@
+"use client";
+
+import { useTheme } from "@/contexts/ThemeContext";
 import { SearchIcon } from "@/lib/icons";
 import { Dispatch, SetStateAction, useRef } from "react";
 
@@ -16,6 +19,7 @@ const MovieSearch = ({
   pagination: number;
   refetch: () => void;
 }) => {
+  const { theme } = useTheme();
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
@@ -39,7 +43,7 @@ const MovieSearch = ({
       </label>
       <div className="flex gap-[10px] w-full md:w-fit">
         <button
-          className="h-[44px] w-[85px] bg-[#B744F714] backdrop-blur-xs cursor-pointer"
+          className={`${theme}  h-[44px] w-[85px] bg-[var(--bg-button-secondary-default)] backdrop-blur-xs cursor-pointer text-[var(--text-button-secondary-default-variant)] disabled:text-[var(--text--button-disabled)] disabled:bg-[var(--bg-button-disabled)] hover:bg-[var(--bg-button-hover)] active:bg-[var(--bg-button-active)]]`}
           onClick={() => {
             setShowModal({
               show: true,

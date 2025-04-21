@@ -73,11 +73,11 @@ const MovieDetails = ({ ...props }) => {
 
   return (
     <div
-      className={`${theme} relative flex flex-col w-full max-w-full lg:m-8 bg-[var(--bg-theme-1)] text-white p-4 lg:p-6 gap-6 rounded-xl shadow-xl z-10 overflow-hidden justify-center items-center`}
+      className={`${theme}  relative flex flex-col w-full max-w-full lg:m-8 bg-[var(--bg-theme-1)] text-[var(--text-default)] p-4 lg:p-6 gap-6 rounded-xl shadow-xl z-10 overflow-hidden justify-center items-center`}
     >
-      <div className={`${theme} w-fit lg:w-full`}>
+      <div className={`${theme}  w-fit lg:w-full`}>
         <div
-          className={`${theme} absolute z-[1] w-full h-full`}
+          className={`${theme}  absolute z-[1] w-full h-full left-0`}
           style={{
             background:
               "linear-gradient(180deg, var(--bg-theme-1) 0%, rgba(18, 17, 19, 0.46) 49.48%, var(--bg-theme-1) 100%)",
@@ -86,11 +86,11 @@ const MovieDetails = ({ ...props }) => {
         <Image
           src={banner ?? Background}
           alt={`${banner} Banner`}
-          className={`${theme} invisible absolute z-0 object-cover lg:h-full lg:max-h-[90%] w-full lg:aspect-[1448/603] lg:visible`}
+          className={`${theme}  invisible absolute z-0 object-cover lg:h-full w-full lg:aspect-[1448/603] lg:visible left-0`}
           width={1440}
           height={564}
         />
-        <div className={`${theme} flex flex-col relative z-10 gap-4`}>
+        <div className={`${theme}  flex flex-col relative z-10 gap-4`}>
           <MovieDetailsActions
             friendlyTitle={friendlyTitle}
             fullTitle={fullTitle}
@@ -99,12 +99,12 @@ const MovieDetails = ({ ...props }) => {
             isMobile={false}
           />
           <div
-            className={`${theme} flex flex-col w-full lg:flex-row gap-4 justify-center items-center`}
+            className={`${theme}  flex flex-col w-full lg:flex-row gap-4 justify-center items-center`}
           >
             <Image
               src={`${image ?? "/assets/placeholder.png"}`}
               alt={`${friendlyTitle ?? "A movie"} Poster`}
-              className={`${theme} w-[374px] h-[582px] rounded-lg object-cover`}
+              className={`${theme}  w-[374px] h-[582px] rounded-lg object-cover`}
               width={374}
               height={582}
             />
@@ -117,26 +117,28 @@ const MovieDetails = ({ ...props }) => {
               additionalClass="!w-full !flex-col-reverse"
             />
             <div
-              className={`${theme} flex flex-grow flex-col gap-4 flex-1 w-full`}
+              className={`${theme}  flex flex-grow flex-col gap-4 flex-1 w-full`}
             >
               <div
-                className={`${theme} flex flex-col-reverse md:flex-col lg:flex-row justify-between lg:h-[98px]`}
+                className={`${theme}  flex flex-col-reverse md:flex-col lg:flex-row justify-between lg:h-[98px]`}
               >
                 <p
-                  className={`${theme} flex justify-center items-center italic text-gray-300 h-full`}
+                  className={`${theme}  flex justify-center items-center italic text-[var(--bg-theme-12)] h-full`}
                 >
                   {phrase ?? "No data"}
                 </p>
-                <div className={`${theme} flex gap-4 items-center`}>
+                <div className={`${theme}  flex gap-4 items-center`}>
                   {ratingMetrics?.map((metric, id) => (
                     <div
-                      className={`${theme} bg-[var(--bg-theme-3)75] px-3 py-3 rounded backdrop-blur-[4px]`}
+                      className={`${theme}  bg-[var(--bg-theme-3-opacity)] px-3 py-3 rounded backdrop-blur-[4px]`}
                       key={id}
                     >
-                      <p className={`${theme} text-[#B5B2BC]`}>
+                      <p className={`${theme}  text-[var(--bg-theme-11)]`}>
                         {metric.propertyName}
                       </p>
-                      <p className={`${theme} text-lg font-bold text-white`}>
+                      <p
+                        className={`${theme}  text-lg font-bold text-[var(--text-default)]`}
+                      >
                         {metric?.data ?? "No data"}
                       </p>
                     </div>
@@ -146,50 +148,54 @@ const MovieDetails = ({ ...props }) => {
                 </div>
               </div>
               <div
-                className={`${theme} flex flex-col lg:flex-row gap-4 rounded-[4px]`}
+                className={`${theme}  flex flex-col lg:flex-row gap-4 rounded-[4px]`}
               >
                 <div
-                  className={`${theme} flex flex-col flex-grow gap-2 min-w-1/2`}
+                  className={`${theme}  flex flex-col flex-grow gap-2 min-w-1/2`}
                 >
                   <ContentBlock
                     description={`${sinopsys ?? "No data"}`}
                     title="Sinopse"
-                    className={`${theme} h-[416px] w-full p-4 backdrop-blur-[4px]`}
+                    className={`${theme}  h-[416px] w-full p-4 backdrop-blur-[4px]`}
                   />
                   <Tags tags={tags ?? "No data"} />
                 </div>
                 <div
-                  className={`${theme} flex flex-grow flex-col w-full h-full items-end gap-4 text-sm text-gray-300`}
+                  className={`${theme}  flex flex-grow flex-col w-full h-full items-end gap-4 text-sm text-[var(--bg-theme-12)]`}
                 >
                   <div
-                    className={`${theme} grid grid-cols-2 gap-x-4 gap-y-2 text-xs w-full`}
+                    className={`${theme}  grid grid-cols-2 gap-x-4 gap-y-2 text-xs w-full`}
                   >
                     {metadataGroup?.map((metadata, id) => (
                       <div
-                        className={`${theme} w-full h-[72px] rounded-[4px] bg-[var(--bg-theme-3)75] flex justify-between p-4 flex-col backdrop-blur-[4px]`}
+                        className={`${theme}  w-full h-[72px] rounded-[4px] bg-[var(--bg-theme-3-opacity)] flex justify-between p-4 flex-col backdrop-blur-[4px]`}
                         key={id}
                       >
-                        <p className={`${theme} text-gray-400 text-[12px]`}>
+                        <p
+                          className={`${theme}  text-[var(--bg-theme-11)] text-[12px]`}
+                        >
                           {metadata?.propertyName ?? "Property"}
                         </p>
-                        <p className={`${theme} font-bold text-[14px]`}>
+                        <p className={`${theme}  font-bold text-[14px]`}>
                           {metadata?.data ?? "No data"}
                         </p>
                       </div>
                     ))}
                   </div>
 
-                  <div className={`${theme} grid grid-cols-3 gap-4 w-full`}>
+                  <div className={`${theme}  grid grid-cols-3 gap-4 w-full`}>
                     {moneyInfo?.map((info, id) => (
                       <div
-                        className={`${theme} bg-[var(--bg-theme-3)75] w-full flex justify-between p-4 flex-col backdrop-blur-[4px]`}
+                        className={`${theme}  bg-[var(--bg-theme-3-opacity)] w-full flex justify-between p-4 flex-col backdrop-blur-[4px] rounded-[4px]`}
                         key={id}
                       >
-                        <p className={`${theme} text-[#B5B2BC] text-[12px]`}>
+                        <p
+                          className={`${theme}  text-[var(--bg-theme-11)] text-[12px]`}
+                        >
                           {info?.propertyName ?? "PropertyName"}
                         </p>
                         <p
-                          className={`${theme} text-[#EEEEF0] text-[14px] font-bold`}
+                          className={`${theme}  text-[var(--bg-theme-12)] text-[14px] font-bold`}
                         >
                           {info?.data ?? "No data"}
                         </p>

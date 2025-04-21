@@ -32,7 +32,7 @@ describe("FormInput", () => {
     expect(input).toHaveClass("w-full");
     expect(input).toHaveClass("p-2");
     expect(input).toHaveClass("bg-[var(--bg-theme-2)]");
-    expect(input).toHaveClass("text-white");
+    expect(input).toHaveClass("text-[var(--text-default)]");
     expect(input).toHaveClass("rounded");
   });
 

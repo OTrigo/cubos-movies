@@ -60,7 +60,7 @@ describe("ThemeSwitcher", () => {
       "pr-5",
       "pb-3",
       "pl-5",
-      "bg-[--bg-button-secondary-default] hover:bg-[var(--bg-button-secondary-hover)] disabled:bg-[var(--bg-button-secondary-disabled)] active:bg-[var(--bg-button-secondary-active)] text-[var(--text-button-secondary-default)] disabled:text-[var(--text-button-secondary-disabled)]]"
+      "bg-[var(--bg-button-secondary-default)] hover:bg-[var(--bg-button-secondary-hover)] disabled:bg-[var(--bg-button-secondary-disabled)] active:bg-[var(--bg-button-secondary-active)] text-[var(--text-button-secondary-default)] disabled:text-[var(--text-button-secondary-disabled)]]"
     );
   });
 });

@@ -31,7 +31,7 @@ describe("Footer", () => {
     expect(footer).toHaveClass("p-6");
     expect(footer).toHaveClass("bg-[var(--bg-theme-1)]");
     expect(footer).toHaveClass("border-t");
-    expect(footer).toHaveClass("border-[#F1E6FD19]");
+    expect(footer).toHaveClass("border-[var(--border-color)]");
   });
 
   test("aplica a classe de cor de texto correta ao texto de copyright", () => {
@@ -40,7 +40,7 @@ describe("Footer", () => {
     const textElement = screen.getByText(
       "2025 © Todos os direitos reservados a Cubos Movies"
     );
-    expect(textElement).toHaveClass("text-[#B5B2BC]");
+    expect(textElement).toHaveClass("text-[var(--bg-theme-11)]");
   });
 
   test("o texto de copyright está dentro de um elemento span", () => {

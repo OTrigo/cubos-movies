@@ -49,7 +49,7 @@ export const CircularProgress: React.FC<CircularProgressProps> = ({
         y="50%"
         textAnchor="middle"
         dominantBaseline="central"
-        className="fill-white font-semibold"
+        className="fill-[var(--text-default)] font-semibold"
         style={{ fontSize: size * 0.25 }}
       >
         {`${clamped}%`}

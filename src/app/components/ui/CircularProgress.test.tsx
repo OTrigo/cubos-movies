@@ -109,7 +109,7 @@ describe("CircularProgress", () => {
     const text = screen.getByText("50%");
     expect(text).toHaveAttribute("text-anchor", "middle");
     expect(text).toHaveAttribute("dominant-baseline", "central");
-    expect(text).toHaveClass("fill-white");
+    expect(text).toHaveClass("fill-var(--text-default)");
     expect(text).toHaveClass("font-semibold");
     expect(text).toHaveStyle("font-size: 30px");
   });
