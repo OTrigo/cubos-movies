@@ -23,9 +23,16 @@ export const createQuery = ({
     }),
     ...(filters?.minDuration &&
       filters?.maxDuration && {
-        releaseDate: {
+        durationTime: {
           gte: filters.minDuration,
           lte: filters.maxDuration,
+        },
+      }),
+    ...(filters?.releaseFrom &&
+      filters?.releaseTo && {
+        releaseDate: {
+          gte: filters.releaseFrom,
+          lte: filters.releaseTo,
         },
       }),
   };
