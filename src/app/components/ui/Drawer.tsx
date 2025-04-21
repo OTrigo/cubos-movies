@@ -11,7 +11,6 @@ const Drawer = ({
   onClose: () => void;
   show: boolean;
 }) => {
-  
   return (
     <>
       {show && (
@@ -20,7 +19,7 @@ const Drawer = ({
           onClick={onClose}
         >
           <div
-            className="relative w-full max-h-full md:max-w-[565px] bg-[#232225] z-50"
+            className="relative w-full max-h-full md:max-w-[565px] bg-[var(--bg-theme-3)] z-50"
             onClick={(e) => e.stopPropagation()}
           >
             <p className="flex justify-between items-center p-4 text-[24px]">

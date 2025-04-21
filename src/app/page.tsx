@@ -1,4 +1,5 @@
 "use client";
+import { useTheme } from "@/contexts/ThemeContext";
 
 import { useUser } from "@/hooks/useUser";
 import Image from "next/image";
@@ -11,7 +12,6 @@ import { useMovieSearch } from "@/hooks/useMovie";
 import { EditFilterProps } from "@actions/movie/movieActions";
 import { useRouter } from "next/navigation";
 import Background from "@/assets/background.png";
-import { useTheme } from "@/contexts/ThemeContext";
 
 const MoviesPage = () => {
   const { data: user, isLoading: isLoadingUser, error: errorUser } = useUser();
@@ -41,7 +41,7 @@ const MoviesPage = () => {
     pagination,
   });
 
-  const {theme} = useTheme()
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (search) {
@@ -62,7 +62,9 @@ const MoviesPage = () => {
   if (!user || errorUser) return <>Redirect...</>;
 
   return (
-    <div className={`${theme} flex flex-col justify-center items-center w-full bg-[var(--bg-theme-1)]`}>
+    <div
+      className={`${theme} flex flex-col justify-center items-center w-full bg-[var(--bg-theme-1)]`}
+    >
       <Modal
         title={showModal.variant === "filter" ? "Filtros" : "Adicionar Filme"}
         show={showModal.show}
@@ -78,15 +80,15 @@ const MoviesPage = () => {
         refetch={refetch}
       />
       <div
-        className="absolute z-[1] top-[72px] w-full h-[564px]"
+        className={`${theme} not-[]:absolute z-[1] top-[72px] w-full h-[564px]`}
         style={{
           background:
-            "linear-gradient(180deg, #121113 0%, rgba(18, 17, 19, 0.46) 49.48%, #121113 100%)",
+            "linear-gradient(180deg, var(--bg-theme-1) 0%, rgba(18, 17, 19, 0.46) 49.48%, var(--bg-theme-1) 100%)",
         }}
       />
 
       <Image
-        className="absolute z-[0] h-full top-[72px] w-full max-h-[564px] object-cover opacity-40"
+        className={`${theme} absolute z-[0] h-full top-[72px] w-full max-h-[564px] object-cover opacity-40`}
         src={Background}
         alt="Cubos Movies Background"
         width={1440}

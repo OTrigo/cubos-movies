@@ -1,4 +1,5 @@
 "use client";
+import { useTheme } from "@/contexts/ThemeContext";
 
 import { Close } from "@/lib/icons";
 import { EditFilterProps } from "@actions/movie/movieActions";
@@ -6,7 +7,6 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 import { MovieFiltersModal } from "../movie/MovieFiltersModal";
 import MovieForm from "../movie/MovieForm";
 import { handleMovieForm } from "@/utils/handleMovieForm";
-import { useTheme } from "@/contexts/ThemeContext";
 
 const Modal = ({
   show,
@@ -46,15 +46,17 @@ const Modal = ({
               className={`${theme} flex w-fit flex-col h-fit bg-[var(--bg-theme-1)] text-[#B5B2BC] text-[16px] font-medium px-[24px] py-[16px]`}
               onClick={(e) => e.stopPropagation()}
             >
-              <p className="flex w-full justify-between items-center">
-                <span className="text-[20px]" onClick={() => {}}>
+              <p
+                className={`${theme} flex w-full justify-between items-center`}
+              >
+                <span className={`${theme} text-[20px]`} onClick={() => {}}>
                   {title}
                 </span>
                 <button onClick={onClose}>
                   <Close />
                 </button>
               </p>
-              <div className="flex w-full h-full flex-col">
+              <div className={`${theme} flex w-full h-full flex-col`}>
                 <MovieFiltersModal
                   setFilters={setFilters}
                   onClose={onClose}
@@ -64,14 +66,16 @@ const Modal = ({
             </div>
           ) : (
             <div
-              className="relative flex w-full md:w-[50%] flex-col h-screen bg-[var(--bg-theme-1)] text-[#B5B2BC] text-[16px] font-medium px-[24px] py-[16px]"
+              className={`${theme} relative flex w-full md:w-[50%] flex-col h-screen bg-[var(--bg-theme-1)] text-[#B5B2BC] text-[16px] font-medium px-[24px] py-[16px]`}
               onClick={(e) => e.stopPropagation()}
             >
-              <p className="flex w-full justify-between items-center">
-                <span className="text-[20px]" onClick={() => {}}>
+              <p
+                className={`${theme} flex w-full justify-between items-center`}
+              >
+                <span className={`${theme} text-[20px]`} onClick={() => {}}>
                   {title}
                 </span>
-                <button className="cursor-pointer" onClick={onClose}>
+                <button className={`${theme} cursor-pointer`} onClick={onClose}>
                   <Close />
                 </button>
               </p>

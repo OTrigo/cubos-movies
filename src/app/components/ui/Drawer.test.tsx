@@ -137,7 +137,7 @@ describe("Drawer", () => {
       screen?.getByText(childrenContent)?.parentElement?.parentElement;
     expect(contentContainer).toHaveClass("relative");
     expect(contentContainer).toHaveClass("w-full");
-    expect(contentContainer).toHaveClass("bg-[#232225]");
+    expect(contentContainer).toHaveClass("bg-[var(--bg-theme-3)]");
     expect(contentContainer).toHaveClass("z-50");
   });
 

@@ -12,7 +12,7 @@ export const FormTextarea = ({ label, name, ...rest }: FormTextareaProps) => (
     <textarea
       id={name}
       name={name}
-      className="w-full p-2 bg-[#1a191b] text-white rounded"
+      className="w-full p-2 bg-[var(--bg-theme-2)] text-white rounded"
       {...rest}
     />
   </div>

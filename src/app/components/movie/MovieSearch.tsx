@@ -24,7 +24,7 @@ const MovieSearch = ({
         <input
           ref={inputRef}
           type="text"
-          className="!min-h-[44px] w-full !h-[44px] md:w-[488px] border rounded-[4px] text-[#6F6D78] bg-[#1A191B] border-[#49474E] px-[16px] py-[12.5px]"
+          className="!min-h-[44px] w-full !h-[44px] md:w-[488px] border rounded-[4px] text-[#6F6D78] bg-[var(--bg-theme-2)] border-[#49474E] px-[16px] py-[12.5px]"
           placeholder="Pesquise por filmes"
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -50,7 +50,7 @@ const MovieSearch = ({
           Filtros
         </button>
         <button
-          className="h-[44px] w-fit px-[20px] py-[12px] bg-[#8E4EC6] backdrop-blur-xs cursor-pointer flex-grow"
+          className="h-[44px] w-fit px-[20px] py-[12px] bg-[var(--bg-button-default)] !text-[var(--text-button-default)] disabled:text-[var(--text--button-disabled)] disabled:bg-[var(--bg-button-disabled)] hover:bg-[var(--bg-button-hover)] active:bg-[var(--bg-button-active)]] backdrop-blur-xs cursor-pointer flex-grow"
           onClick={() => setShowModal({ show: true, variant: "add" })}
         >
           Adicionar Filme

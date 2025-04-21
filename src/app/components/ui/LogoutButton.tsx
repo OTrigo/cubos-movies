@@ -1,4 +1,5 @@
 "use client";
+import { useTheme } from "@/contexts/ThemeContext";
 
 import { useUser } from "@/hooks/useUser";
 import { logout } from "@/lib/auth";
@@ -19,9 +20,11 @@ const LogoutButton = () => {
     router.replace("/signUp");
   };
 
+  const { theme } = useTheme();
+
   return (
     <div
-      className="w-fit h-[44px] min-h-[44px] rounded-[2px] pt-3 pr-5 pb-3 pl-5 bg-[#8E4EC6] cursor-pointer"
+      className={`${theme} w-fit h-[44px] min-h-[44px] rounded-[2px] pt-3 pr-5 pb-3 pl-5 bg-[var(--bg-button-default)] !text-[var(--text-button-default)] disabled:text-[var(--text--button-disabled)] disabled:bg-[var(--bg-button-disabled)] hover:bg-[var(--bg-button-hover)] active:bg-[var(--bg-button-active)]] cursor-pointer`}
       onClick={
         pathname === "/signIn" || pathname === "/signUp" ? signUp : handleLogout
       }

@@ -1,4 +1,5 @@
 "use client";
+import { useTheme } from "@/contexts/ThemeContext";
 
 import { EditFilterProps } from "@actions/movie/movieActions";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -8,10 +9,11 @@ export function MovieFiltersModal({
   refetch,
   onClose = () => {},
 }: {
-  setFilters: Dispatch<SetStateAction<EditFilterProps|undefined>>;
+  setFilters: Dispatch<SetStateAction<EditFilterProps | undefined>>;
   onClose: () => void;
   refetch: () => void;
 }) {
+  const { theme } = useTheme();
   const [localFilters, setLocalFilters] = useState<EditFilterProps>({});
 
   const handleChange = (
@@ -39,12 +41,12 @@ export function MovieFiltersModal({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 grid gap-4">
+    <form onSubmit={handleSubmit} className={`${theme} p-4 grid gap-4`}>
       <div>
         <label>Gênero:</label>
         <select
           onChange={(e) => handleChange("genre", e.target.value)}
-          className="w-full"
+          className={`${theme} w-full`}
         >
           <option value="">Todos</option>
           <option value="Ação">Ação</option>
@@ -58,7 +60,7 @@ export function MovieFiltersModal({
         <label>Idioma:</label>
         <select
           onChange={(e) => handleChange("language", e.target.value)}
-          className="w-full"
+          className={`${theme} w-full`}
         >
           <option value="">Todos</option>
           <option value="pt">Português</option>
@@ -75,7 +77,7 @@ export function MovieFiltersModal({
           max={10}
           step={0.1}
           onChange={(e) => handleChange("minRating", Number(e.target.value))}
-          className="w-full"
+          className={`${theme} w-full`}
         />
       </div>
 
@@ -83,7 +85,7 @@ export function MovieFiltersModal({
         <label>Status:</label>
         <select
           onChange={(e) => handleChange("status", e.target.value)}
-          className="w-full"
+          className={`${theme} w-full`}
         >
           <option value="">Todos</option>
           <option value="released">Lançado</option>
@@ -94,17 +96,17 @@ export function MovieFiltersModal({
 
       <div>
         <label>Lançado entre:</label>
-        <div className="flex gap-2">
+        <div className={`${theme} flex gap-2`}>
           <input
             type="date"
             onChange={(e) => handleChange("releaseFrom", e.target.value)}
-            className="w-full invert"
+            className={`${theme} w-full invert`}
             min={"1900-01-01"}
           />
           <input
             type="date"
             onChange={(e) => handleChange("releaseTo", e.target.value)}
-            className="w-full invert"
+            className={`${theme} w-full invert`}
             min={"1900-01-01"}
           />
         </div>
@@ -112,7 +114,7 @@ export function MovieFiltersModal({
 
       <button
         type="submit"
-        className="bg-[#8e4ec6] text-white p-2 rounded mt-2 cursor-pointer"
+        className={`${theme} bg-[var(--bg-button-default)] !text-[var(--text-button-default)] disabled:text-[var(--text--button-disabled)] disabled:bg-[var(--bg-button-disabled)] hover:bg-[var(--bg-button-hover)] active:bg-[var(--bg-button-active)]] p-2 rounded mt-2 cursor-pointer`}
       >
         Aplicar filtros
       </button>

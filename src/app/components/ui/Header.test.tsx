@@ -7,7 +7,7 @@ describe("Header", () => {
 
     const header = screen.getByRole("banner");
     expect(header).toHaveClass(
-      "relative flex w-full md:h-[72px] justify-between items-center bg-[#12111380] px-4 z-30"
+      "relative flex w-full md:h-[72px] justify-between items-center bg-[var(--bg-theme-1)80] px-4 z-30"
     );
   });
 });

@@ -3,7 +3,7 @@ import SkeletonBlock from "../SkeletonBlock";
 const MovieSkeleton = () => {
   return (
     <div className="flex justify-center items-center w-full bg-[var(--bg-theme-1)] flex-col px-2 animate-pulse">
-      <div className="absolute z-[10] top-[72px] w-full h-[564px] bg-gradient-to-b from-[#121113] via-[#1c1b1e77] to-[#121113]">
+      <div className="absolute z-[10] top-[72px] w-full h-[564px] bg-gradient-to-b from-[var(--bg-theme-1)] via-[#1c1b1e77] to-[var(--bg-theme-1)]">
         <SkeletonBlock width="w-full" height="h-full" />
       </div>
       <div className="absolute z-[0] top-[72px] w-full max-h-[564px] bg-gray-800 opacity-30" />

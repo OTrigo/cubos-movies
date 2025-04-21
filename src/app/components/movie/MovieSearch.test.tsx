@@ -141,7 +141,7 @@ describe("MovieSearch", () => {
     expect(searchInput).toHaveClass("w-full");
     expect(searchInput).toHaveClass("!min-h-[44px]");
     expect(searchInput).toHaveClass("border-[#49474E]");
-    expect(searchInput).toHaveClass("bg-[#1A191B]");
+    expect(searchInput).toHaveClass("bg-[var(--bg-theme-2)]");
   });
 
   test("o componente deve usar o hook useRef corretamente", () => {

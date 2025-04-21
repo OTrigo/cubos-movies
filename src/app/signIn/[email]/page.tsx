@@ -1,4 +1,5 @@
 "use client";
+import { useTheme } from "@/contexts/ThemeContext";
 
 import Image from "next/image";
 import { sendValidationEmail } from "@actions/email/emailActions";
@@ -7,22 +8,24 @@ import { useParams } from "next/navigation";
 
 const UnverifiedEmailPage = () => {
   const { email } = useParams();
+
+  const { theme } = useTheme();
   const handleResendEmail = async () => {
     await sendValidationEmail({ email } as { email: string });
   };
 
   return (
-    <div className="flex h-[calc(100vh-140px)] justify-center items-center w-full py-[281px] bg-[var(--bg-theme-1)]">
+    <div className={`${theme} flex h-[calc(100vh-140px)] justify-center items-center w-full py-[281px] bg-[var(--bg-theme-1)]`}>
       <div
-        className="absolute z-[1] top-[72px] w-full h-[564px]"
+        className={`${theme} absolute z-[1] top-[72px] w-full h-[564px]`}
         style={{
           background:
-            "linear-gradient(180deg, #121113 0%, rgba(18, 17, 19, 0.46) 49.48%, #121113 100%)",
+            "linear-gradient(180deg, var(--bg-theme-1) 0%, rgba(18, 17, 19, 0.46) 49.48%, var(--bg-theme-1) 100%)",
         }}
       />
 
       <Image
-        className="absolute z-[0] h-full top-[72px] w-full max-h-[564px] object-cover opacity-40"
+        className={`${theme} absolute z-[0] h-full top-[72px] w-full max-h-[564px] object-cover opacity-40`}
         src={Background}
         alt="Cubos Movies Background"
         width={1440}
@@ -30,15 +33,15 @@ const UnverifiedEmailPage = () => {
       />
 
       <form
-        className="relative z-10 flex flex-col gap-4 w-fit bg-[#232225] p-4 rounded-1"
+        className={`${theme} relative z-10 flex flex-col gap-4 w-fit bg-[var(--bg-theme-3)] p-4 rounded-1`}
         onSubmit={(e) => e.preventDefault()}
       >
-        <label className="flex flex-col gap-4 h-fit">
-          <span className="text-white text-[20px]">
+        <label className={`${theme} flex flex-col gap-4 h-fit`}>
+          <span className={`${theme} text-white text-[20px]`}>
             Verifique para acessar A Cubos Movies
           </span>
           <button
-            className="outline hover:outline-[#8E4EC6] hover:bg-[#8E4EC6] transition-all duration-300 cursor-pointer py-4 w-full text-[16px] font-bold"
+            className={`${theme} outline hover:outline-[var(--bg-button-default)] !text-[var(--text-button-default)] disabled:text-[var(--text--button-disabled)] disabled:bg-[var(--bg-button-disabled)] hover:bg-[var(--bg-button-hover)] active:bg-[var(--bg-button-active)]] hover:bg-[var(--bg-button-default)] !text-[var(--text-button-default)] disabled:text-[var(--text--button-disabled)] disabled:bg-[var(--bg-button-disabled)] hover:bg-[var(--bg-button-hover)] active:bg-[var(--bg-button-active)]] transition-all duration-300 cursor-pointer py-4 w-full text-[16px] font-bold`}
             onClick={async (e) => {
               e.preventDefault();
               handleResendEmail();
