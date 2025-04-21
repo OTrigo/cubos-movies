@@ -1,9 +1,10 @@
 "use client";
 
-import { createContext, useState, JSX, useContext } from "react";
+import { createContext, useState, useContext } from "react";
 
+type Theme = "light" | "dark";
 type ThemeContextType = {
-  theme: "light" | "dark";
+  theme: Theme;
   toggleTheme: () => void;
 };
 
@@ -12,11 +13,20 @@ const ThemeContext = createContext<ThemeContextType>({
   toggleTheme: () => {},
 });
 
-export const ThemeProvider = ({ children }: { children: JSX.Element }) => {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
+export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+  const defaultValue =
+    window !== undefined && window?.document?.cookie?.match("light")
+      ? "light"
+      : "dark";
+
+  const [theme, setTheme] = useState<Theme>(defaultValue);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    document?.documentElement?.classList?.remove("light", "dark");
+    document?.documentElement?.classList?.add(newTheme);
+    document.cookie = `theme=${newTheme}; path=/; max-age=31536000`;
   };
 
   return (

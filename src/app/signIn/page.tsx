@@ -99,7 +99,7 @@ const LoginPage = () => {
         {errors.password && <>Invalid Pass</>}
         <div className={`${theme}  flex justify-between`}>
           <span
-            className={`${theme}  text-[16px] underline text-[var(--bg-button-default)] !text-[var(--text-button-default)] disabled:text-[var(--text--button-disabled)] disabled:bg-[var(--bg-button-disabled)] hover:bg-[var(--bg-button-hover)] active:bg-[var(--bg-button-active)]] cursor-pointer`}
+            className={`${theme}  text-[16px] underline text-[var(--bg-button-default-variant-forgot)]`}
           >
             {"Esqueci minha senha"}
           </span>

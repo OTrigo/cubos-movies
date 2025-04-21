@@ -42,13 +42,15 @@ const MoviesPage = () => {
     pagination,
   });
 
+  console.log({ total: movies?.total });
+
   const { theme } = useTheme();
 
   useEffect(() => {
-    if (search) {
+    if (search || filters || pagination || pagination === 0) {
       refetch();
     }
-  }, [search, refetch]);
+  }, [search, filters, pagination, refetch]);
 
   const [showModal, setShowModal] = useState<{
     show: boolean;
@@ -64,7 +66,7 @@ const MoviesPage = () => {
 
   return (
     <div
-      className={`${theme}  flex flex-col justify-center items-center w-full bg-[var(--bg-theme-1)]`}
+      className={`${theme} min-h-screen flex flex-col justify-center items-center w-full bg-[var(--bg-theme-1)]`}
     >
       <Modal
         title={showModal.variant === "filter" ? "Filtros" : "Adicionar Filme"}
@@ -100,7 +102,7 @@ const MoviesPage = () => {
       <MoviePagination
         setPagination={setPagination}
         pagination={pagination}
-        totalPages={Math.trunc((movies?.total ?? 0) / 10)}
+        totalPages={Math.round((movies?.total ?? 0) / 10)}
       />
     </div>
   );

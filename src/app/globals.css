@@ -1,8 +1,45 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-theme-1: #fdfcfd;
+  --bg-theme-2: #faf9fb;
+  --bg-theme-3: #f2eff3;
+  --bg-theme-3-opacity: #f2eff375;
+  --bg-theme-4: #eae7ec;
+  --bg-theme-5: #e3dfe6;
+  --bg-theme-6: #dbd8e0;
+  --bg-theme-7: #d0cdd7;
+  --bg-theme-8: #bcbac7;
+  --bg-theme-9: #8e8c99;
+  --bg-theme-10: #84828e;
+  --bg-theme-11: #65636d;
+  --bg-theme-12: #211f26;
+
+  --text-default: #121113;
+
+  --bg-button-default: #8e4ec6;
+  --bg-button-hover: #9a5cd0;
+  --bg-button-active: #8457aa;
+  --bg-button-disabled: #6f6d78;
+
+  --text-button-default: #fff;
+  --text-button-disabled: #ece9fd49;
+
+  --bg-button-secondary-default: #b744f708;
+  --bg-button-secondary-hover: #c150ff18;
+  --bg-button-secondary-active: #b412f904;
+  --bg-button-secondary-disabled: #ebeaf808;
+
+  --text-button-secondary-default: #f1ddff98;
+  --text-button-secondary-disabled: #ece9fd49;
+
+  --text-button-secondary-default-variant: black;
+
+  --svg-color: #bcbac7;
+
+  --border-color: #84828e60;
+
+  --bg-button-default-variant-forgot: var(--bg-theme-12);
 }
 
 @theme inline {
@@ -13,71 +50,31 @@
   --font-montserrat: var(--font-montserrat);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-theme-1: #fdfcfd;
-    --bg-theme-2: #faf9fb;
-    --bg-theme-3: #f2eff3;
-    --bg-theme-3-opacity: #f2eff375;
-    --bg-theme-4: #eae7ec;
-    --bg-theme-5: #e3dfe6;
-    --bg-theme-6: #dbd8e0;
-    --bg-theme-7: #d0cdd7;
-    --bg-theme-8: #bcbac7;
-    --bg-theme-9: #8e8c99;
-    --bg-theme-10: #84828e;
-    --bg-theme-11: #65636d;
-    --bg-theme-12: #211f26;
+.dark {
+  --bg-theme-1: #121113;
+  --bg-theme-2: #1a191b;
+  --bg-theme-3: #232225;
+  --bg-theme-3-opacity: #23222575;
+  --bg-theme-4: #2b292d;
+  --bg-theme-5: #323035;
+  --bg-theme-6: #3c393f;
+  --bg-theme-7: #49474e;
+  --bg-theme-8: #625f69;
+  --bg-theme-9: #6f6d78;
+  --bg-theme-10: #7c7a85;
+  --bg-theme-11: #b5b2bc;
+  --bg-theme-12: #eeeef0;
 
-    --text-default: #121113;
+  --text-default: #fdfcfd;
+  --svg-color: #f1ddff98;
 
-    --bg-button-default: #8e4ec6;
-    --bg-button-hover: #9a5cd0;
-    --bg-button-active: #8457aa;
-    --bg-button-disabled: #6f6d78;
+  --text-button-secondary-default: #f1ddff98;
+  --text-button-secondary-disabled: #ece9fd49;
 
-    --text-button-default: #fff;
-    --text-button-disabled: #ece9fd49;
+  --text-button-secondary-default-variant: #f1ddff98;
+  --border-color: #f1e6fd19;
 
-    --bg-button-secondary-default: #b744f708;
-    --bg-button-secondary-hover: #c150ff18;
-    --bg-button-secondary-active: #b412f904;
-    --bg-button-secondary-disabled: #EBEAF808;
-
-    --text-button-secondary-default: #f1ddff98;
-    --text-button-secondary-disabled: #ece9fd49;
-
-    --text-button-secondary-default-variant: black;
-
-    --svg-color: #bcbac7;
-
-    --border-color: #84828e60;
-  }
-
-  .dark {
-    --bg-theme-1: #121113;
-    --bg-theme-2: #1a191b;
-    --bg-theme-3: #232225;
-    --bg-theme-3-opacity: #23222575;
-    --bg-theme-4: #2b292d;
-    --bg-theme-5: #323035;
-    --bg-theme-6: #3c393f;
-    --bg-theme-7: #49474e;
-    --bg-theme-8: #625f69;
-    --bg-theme-9: #6f6d78;
-    --bg-theme-10: #7c7a85;
-    --bg-theme-11: #b5b2bc;
-    --bg-theme-12: #eeeef0;
-
-    --text-default: #fdfcfd;
-    --svg-color: #f1ddff98;
-
-    --text-button-secondary-default: #f1ddff98;
-    --text-button-secondary-disabled: #ece9fd49;
-
-    --text-button-secondary-default-variant: #f1ddff98;
-    --border-color: #f1e6fd19;
-  }
+  --bg-button-default-variant-forgot: var(--bg-button-default);
 }
 
 html {

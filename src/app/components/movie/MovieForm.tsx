@@ -17,7 +17,7 @@ const MovieForm = ({
   return (
     <form
       id={`movie-form-${variant}`}
-      className={`${theme}  flex flex-col gap-4 overflow-y-scroll w-full h-full p-4`}
+      className={`${theme}  flex flex-col gap-4 overflow-y-scroll w-full h-full py-8 `}
       onSubmit={async (e) => {
         await onSubmit(e);
       }}

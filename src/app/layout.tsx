@@ -16,15 +16,16 @@ export const metadata: Metadata = {
   description: "A movie web app built by Cubos Team.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="pt-br">
-      <TanstackProvider>
-        <ThemeProvider>
+      <ThemeProvider>
+        <TanstackProvider>
           <body
             className={`${MontserratFont.variable} antialiased font-montserrat h-screen`}
           >
@@ -32,8 +33,8 @@ export default function RootLayout({
             {children}
             <Footer />
           </body>
-        </ThemeProvider>
-      </TanstackProvider>
+        </TanstackProvider>
+      </ThemeProvider>
     </html>
   );
 }

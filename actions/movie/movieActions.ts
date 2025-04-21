@@ -2,7 +2,8 @@
 
 import { getUserIdFromToken } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { Movie } from "@prisma/client";
+import { createQuery } from "@/utils/createQuery";
+import { Movie, Prisma } from "@prisma/client";
 
 export type FilterProps = {
   label: string;
@@ -18,97 +19,35 @@ export type EditFilterProps = {
   releaseTo?: string;
 };
 
-type GetMovieProps = {
-  pagination: number;
-  filters: EditFilterProps;
-};
-
-export const getMovies = async ({ filters, pagination }: GetMovieProps) => {
-  try {
-    const movies = await prisma.movie.findMany({
-      take: 10,
-      skip: (pagination ?? 0) * 10,
-      where: {
-        ...(filters?.genre && { tags: { contains: filters.genre } }),
-        ...(filters?.language && { language: filters.language }),
-        ...(filters?.status && { status: filters.status }),
-        ...(filters?.minRating && { rating: { gte: filters.minRating } }),
-        ...(filters?.releaseFrom &&
-          filters?.releaseTo && {
-            releaseDate: {
-              gte: new Date(filters.releaseFrom),
-              lte: new Date(filters.releaseTo),
-            },
-          }),
-      },
-    });
-
-    if (!movies) return { error: "Couldn't search movies" };
-
-    return { success: true, data: movies, total: movies.length };
-  } catch (err) {
-    console.error(err);
-    return { error: "Couldn't search movies" };
-  }
-};
-
-export const getMovieBySearch = async ({
+export const getMoviesBySearch = async ({
   search,
   pagination,
   filters,
 }: {
-  search: string;
+  search?: string;
   pagination: number;
   filters: EditFilterProps;
 }) => {
   try {
-    const movies = await prisma.movie.findMany({
-      take: 10,
-      skip: (pagination ?? 0) * 10,
-      where: {
-        ...(filters?.genre && {
-          tags: { contains: filters.genre, mode: "insensitive" },
-        }),
-        ...(filters?.language && {
-          language: filters.language,
-          mode: "insensitive",
-        }),
-        ...(filters?.status && { status: filters.status, mode: "insensitive" }),
-        ...(filters?.minRating && {
-          rating: { gte: filters.minRating },
-          mode: "insensitive",
-        }),
-        ...(filters?.releaseFrom &&
-          filters?.releaseTo && {
-            releaseDate: {
-              gte: new Date(filters.releaseFrom),
-              lte: new Date(filters.releaseTo),
-            },
-            mode: "insensitive",
-          }),
-        OR: [
-          {
-            friendlyTitle: {
-              contains: search,
-              mode: "insensitive",
-            },
-          },
-          {
-            fullTitle: {
-              contains: search,
-              mode: "insensitive",
-            },
-          },
-          {
-            tags: {
-              contains: search,
-              mode: "insensitive",
-            },
-          },
-        ],
-      },
+    const whereClause: Prisma.MovieWhereInput = createQuery({
+      search,
+      filters,
     });
-    return { success: true, data: movies, total: movies.length };
+
+    const [movies, total] = await Promise.all([
+      prisma.movie.findMany({
+        take: 10,
+        skip: (pagination ?? 0) * 10,
+        where: whereClause,
+      }),
+      prisma.movie.count({
+        where: whereClause,
+      }),
+    ]);
+
+    console.log(movies, total);
+
+    return { success: true, data: movies, total };
   } catch (error) {
     return { error };
   }
@@ -176,9 +115,8 @@ export const editMovie = async ({
   data: Partial<Movie>;
   movieId: string;
 }) => {
-
   const filteredData: Partial<Movie> = Object.fromEntries(
-    //eslint-disable-next-line 
+    //eslint-disable-next-line
     Object.entries(data).filter(([_, value]) => {
       const isInvalid =
         value === undefined ||

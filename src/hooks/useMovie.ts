@@ -1,8 +1,7 @@
 import {
   EditFilterProps,
   getMovieById,
-  getMovieBySearch,
-  getMovies,
+  getMoviesBySearch,
 } from "@actions/movie/movieActions";
 import { useQuery } from "@tanstack/react-query";
 
@@ -18,9 +17,8 @@ const useMovieSearch = ({
   return useQuery({
     queryKey: ["movie"],
     queryFn: async () => {
-      const movie = search
-        ? await getMovieBySearch({ search, filters, pagination })
-        : await getMovies({ filters, pagination });
+      console.log({ search, filters, pagination });
+      const movie = await getMoviesBySearch({ search, filters, pagination });
       if (!movie) throw new Error("Usuário não autenticado");
       return movie;
     },
