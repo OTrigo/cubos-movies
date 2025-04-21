@@ -10,11 +10,11 @@ const MovieTrailer = ({
   return (
     <div className="relative flex flex-col w-full max-w-full m-8 bg-[#121113] text-white p-6 gap-6 rounded-xl shadow-xl z-10 overflow-hidden">
       <p className="text-3xl font-bold">{title}</p>
-      <div>
+      <div className="h-[382px] md:h-[556] w-full aspect-video">
         {trailer?.includes("youtube") && (
           <iframe
             width="100%"
-            height="556"
+            height="100%"
             src={`https://www.youtube.com/embed/${idFromTrailer}`}
           ></iframe>
         )}

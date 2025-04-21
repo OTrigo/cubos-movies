@@ -8,7 +8,7 @@ const ThemeSwitcher = () => {
 
   return (
     <div
-      className="h-[44px] rounded-[2px] gap-3 pt-3 pr-5 pb-3 pl-5 bg-[#B744F708]"
+      className="h-[44px] rounded-[2px] gap-3 pt-3 pr-5 pb-3 pl-5 bg-[#B744F708] cursor-pointer"
       onClick={toggleTheme}
     >
       {theme ? <Sun /> : <Moon />}

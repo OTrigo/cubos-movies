@@ -25,10 +25,10 @@ const MovieCard = ({ movie }: { movie: Movie; key: number }) => {
             background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 50%, #000000 100%)`,
           }}
         >
-          <div className="text-white text-[16px] uppercase">
+          <div className="text-white text-wrap text-[16px] uppercase">
             {movie?.fullTitle ?? "No data"}
           </div>
-          <div className="text-[#B4B4B4] text-[12.8px] font-normal">
+          <div className="text-wrap text-[#B4B4B4] text-[12.8px] font-normal truncate">
             {movie?.tags ?? "No Categories"}
           </div>
         </div>
