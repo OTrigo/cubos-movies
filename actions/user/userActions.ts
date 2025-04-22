@@ -9,6 +9,7 @@ import { randomBytes } from "crypto";
 import { cookies } from "next/headers";
 import { sendEmail } from "@/lib/sendEmail";
 import { sendConfirmationEmail } from "@actions/email/emailActions";
+import { User } from "@prisma/client";
 
 type CreateUserProps = {
   email: string;
@@ -22,6 +23,28 @@ interface UserCredentials {
 }
 
 const JWT_SECRET = process.env.JWT_SECRET!;
+
+const createUserSession = async (user: User) => {
+  const token = jwt.sign(
+    { id: user?.id, email: user?.email, verified: user?.verified },
+    JWT_SECRET
+  );
+
+  const cookieStore = await cookies();
+
+  const cookieName = "session-token";
+
+  cookieStore.set({
+    name: cookieName,
+    value: token,
+    httpOnly: true,
+    secure: process.env.NODE_ENV !== "development",
+    maxAge: 60 * 60 * 24 * 3,
+    path: "/",
+  });
+
+  return { success: true };
+};
 
 export const getUserByCredentials = async ({
   emailOrName,
@@ -43,25 +66,11 @@ export const getUserByCredentials = async ({
 
     if (!isValid) return { error: "Invalid Password" };
 
-    const token = jwt.sign(
-      { id: user?.id, email: user?.email, verified: user?.verified },
-      JWT_SECRET
-    );
+    const session = await createUserSession(user);
 
-    const cookieStore = await cookies();
+    if (!session) return { error: "Couldn't create session" };
 
-    const cookieName = "session-token";
-
-    cookieStore.set({
-      name: cookieName,
-      value: token,
-      httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
-      maxAge: 60 * 60 * 24 * 3,
-      path: "/",
-    });
-
-    return { success: true };
+    return { session };
   } catch (err) {
     console.error(err);
     return { error: "Couldn't log in" };
@@ -132,20 +141,16 @@ export const createUser = async ({
   }
 };
 
-export const validateUser = async ({
-  token,
-  email,
-}: {
-  token: string;
-  email: string;
-}) => {
+export const validateUser = async ({ token }: { token: string }) => {
   try {
-    const user = await prisma.user.findUnique({ where: { email } });
     const isValidToken = await prisma.emailVerificationToken.findFirst({
-      where: { token, userId: user?.id },
+      where: { token },
+    });
+    const user = await prisma.user.findUnique({
+      where: { id: isValidToken?.userId },
     });
 
-    if (!user || !isValidToken) return { error: "Invalid token" };
+    if (!isValidToken) return { error: "Invalid token" };
 
     if (isValidToken.used) return { error: "Token already used" };
 
@@ -162,9 +167,15 @@ export const validateUser = async ({
 
     if (!updatedUser) return { error: "Couldn't update user" };
 
-    const sentEmail = await sendConfirmationEmail({ email, token });
+    const sentEmail = await sendConfirmationEmail({
+      email: updatedUser?.[0]?.email,
+      token
+    });
 
     if (!sentEmail) return { error: "Couldn't send confirmation email" };
+
+    const session = await createUserSession(updatedUser?.[0]);
+    if (!session) return { error: "Couldn't create session" };
 
     return { success: true, data: updatedUser };
   } catch (error) {

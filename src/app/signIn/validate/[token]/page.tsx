@@ -8,7 +8,7 @@ import { useParams, useRouter } from "next/navigation";
 import Background from "@/assets/background.png";
 
 const UnverifiedEmailPage = () => {
-  const { data: user, refetch } = useUser();
+  const { refetch } = useUser();
 
   const { theme } = useTheme();
 
@@ -17,19 +17,18 @@ const UnverifiedEmailPage = () => {
   const token = useParams().token as string;
 
   const confirmAccount = async () => {
-    if (!user) return;
 
     await validateUser({
-      email: user.email,
       token: token ?? "",
     });
+    
     await refetch();
     router.replace("/");
   };
 
   return (
     <div
-      className={`${theme} h-full flex h-[calc(100vh-140px)] justify-center items-center w-full py-[281px] bg-[var(--bg-theme-1)]`}
+      className={`${theme} h-full flex justify-center items-center w-full py-[281px] bg-[var(--bg-theme-1)]`}
     >
       <div
         className={`${theme}  absolute z-[1] top-[72px] w-full h-[564px]`}
