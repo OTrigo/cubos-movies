@@ -26,7 +26,7 @@ export const sendEmail = async ({
 
   try {
     const sentEmail = await resend.emails.send({
-      from: "onboarding@resend.dev",
+      from: "trigo@otrigo.com",
       to: email,
       subject,
       html,
